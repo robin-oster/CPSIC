@@ -4,4 +4,10 @@
 
 */
 
+void coronaInfo::updateOhioCount(){
+}
+
+void coronaInfo::updateUSCount() {
+}
+
 #include "coronaInfo.h"

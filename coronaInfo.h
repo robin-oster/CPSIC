@@ -15,8 +15,26 @@
 
 class coronaInfo {
 public:
+	/**
+	Updates ohioCount based on national database data.
+	*/
+	void updateOhioCount();
+	/**
+	Updates usCount based on national database data
+	*/
+	void updateUSCount();
 
+	/**
+	Returns ohioCount.
+	*/
+	int getOhioCount() { return ohioCount; }
+	/**
+	Returns usCount.
+	*/
+	int getUSCount() { return usCount; }
 private:
+	int ohioCount; /*!< Number of Coronavirus cases in Ohio. */
+	int usCount; /*!< Number of Coronavirus casesin the US. */
 
 };
 

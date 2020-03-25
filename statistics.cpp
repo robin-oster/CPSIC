@@ -5,3 +5,13 @@
 */
 
 #include "statistics.h"
+
+void Statistics::logNewPatient(ksuPatient patient) {
+}
+
+bool Statistics::checkID(ksuPatient patient) {
+	return false;
+}
+
+void Statistics::calculatePercentages(){
+}
