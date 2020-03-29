@@ -4,10 +4,11 @@
 
 */
 
-void coronaInfo::updateOhioCount(){
+#include "coronaInfo.h"
+#include <vector>
+
+std::vector<ksuPatient> coronaInfo::updateOhioCount() {
 }
 
 void coronaInfo::updateUSCount() {
 }
-
-#include "coronaInfo.h"

@@ -13,12 +13,15 @@
 	@author Matthew Oster moster@kent.edu
 */
 
+#include "ksuPatient.h"
+#include <vector>
+
 class coronaInfo {
 public:
 	/**
 	Updates ohioCount based on national database data.
 	*/
-	void updateOhioCount();
+	std::vector<ksuPatient> updateOhioCount();
 	/**
 	Updates usCount based on national database data
 	*/

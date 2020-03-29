@@ -9,7 +9,7 @@
 #define STATISTICS_H
 
 #include "ksuPatient.h"
-#include "coronaInfo.h"
+#include <vector>
 
 /**
 
@@ -33,7 +33,7 @@ public:
 	/**
 	Increments coronaCount.
 	*/
-	void incrementCoronaCount() { coronaCount++; }
+	ksuPatient incrementCoronaCount();
 	/**
 	Increments counselingCount.
 	*/
@@ -45,6 +45,17 @@ public:
 	*/
 	void calculatePercentages();
 
+	/**
+	Simple accessor methods.
+	*/
+	int getPatientCount() { return patientCount; }
+	int getFluCount() { return fluCount; }
+	int getCoronaCount() { return coronaCount; }
+	int getCounselingCount() { return counselingCount; }
+	double getFluPercent() { return fluPercent; }
+	double getCoronaPercent() { return coronaPercent; }
+	double getCounselingPercent() { return counselingPercent; }
+
 private:
 	/**
 	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
@@ -54,6 +65,11 @@ private:
 	*/
 	bool checkID(ksuPatient patient);
 
+	/**
+	Resposible for storing collection of registered patients.
+	*/
+	std::vector<ksuPatient> registeredPatients;
+
 	int patientCount; /*!< Number of unique patients registered in the system. */
 	int fluCount; /*!< Number of patients exhibiting flu-like symptoms. */
 	int coronaCount; /*!< Number of patients who have contracted Coronavirus. */
@@ -61,11 +77,6 @@ private:
 	double fluPercent; /*!< Percentage of patients exhibiting flu-like symptoms. */
 	double coronaPercent; /*!< Percentage of patients who've contracted Coronavirus.*/
 	double counselingPercent; /*!< Percentage of patients who've sought counseling for Coronavirus-related reasons. */
-
-	/**
-	coronaInfo object responsible for keeping track of total US and Ohio cases.
-	*/
-	coronaInfo nationalInfo;
 
 };
 
