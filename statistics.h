@@ -57,13 +57,6 @@ public:
 	double getCounselingPercent() { return counselingPercent; }
 
 private:
-	/**
-	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
-	This is a helper function for logNewPatient.
-
-	@param patient The patient who's ID is being looked for in the system.
-	*/
-	bool checkID(ksuPatient patient);
 
 	/**
 	Resposible for storing collection of registered patients.
