@@ -47,8 +47,8 @@ class schedule {
 		
 	private:
 		//schedule file stream
-		ifstream schedule;
-		ofstream schedule;
+		ifstream iSchedule;
+		ofstream oSchedule;
 		
 		//apppointment structure
 		//appointments saved to schedule
