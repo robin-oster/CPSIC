@@ -25,7 +25,7 @@ bill.o:	bill.h bill.cpp
 coronaInfo.o:	coronaInfo.h coronaInfo.cpp
 	${CXX} ${CXXFLAGS} -c coronaInfo.cpp
 
-main.o	main.cpp
+main.o:	main.cpp
 	${CXX} ${CXXFLAGS} -c main.cpp
 
 #----------------------------------------------------------------------------
