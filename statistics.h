@@ -56,12 +56,11 @@ public:
 	double getCoronaPercent() { return coronaPercent; }
 	double getCounselingPercent() { return counselingPercent; }
 
-private:
-
 	/**
 	Resposible for storing collection of registered patients.
 	*/
 	std::vector<ksuPatient> registeredPatients;
+private:
 
 	int patientCount; /*!< Number of unique patients registered in the system. */
 	int fluCount; /*!< Number of patients exhibiting flu-like symptoms. */
