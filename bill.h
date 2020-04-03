@@ -39,10 +39,5 @@ private:
 	double paidTotal; //Total amount paid to either the Health or Counseling service
 	double unpaidTotal; //Total amount to be paid to either the Health or Counseling service
 	bool paid; //Checks whether a bill has been paid (true) or unpaid (false)
-	/*
-		Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
-		This is a helper function for getBill.
-		@param patient The patient who's ID is being looked for in the system.
-	*/
-	bool checkID(ksuPatient patient);
+	
 };
