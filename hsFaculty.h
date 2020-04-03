@@ -48,6 +48,21 @@ public:
      @param Statistics
      */
     void showStats(statistics);
+    
+     /**
+     Allows user to update patient record
+     
+     @param User User must be passed to find record.
+     @param statistics
+     */
+    void updateRecord(User, statistics);
+    
+    /**
+     Displays patient record.
+     
+     @param User User must be passed to find record.
+     */
+    void viewRecord(User);
 
 private:
     /**
