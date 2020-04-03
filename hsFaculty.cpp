@@ -42,3 +42,21 @@ void hsFaculty::showStats(statistics)
     cout << "# of Patients who saught Counseling:\t" << statistics.getCounselingCount() << "  /  " << statistics.getCounselingPercent << endl;
 }
 
+void updateRecord(User, statistics);
+{
+    /* system will ask questions, as faculty answers them pertaining the patient,
+     answers will be wrote to file & statistics will be updated also  */
+    
+    /// ifstream -> open patient record file with corresponding ID
+    /*  if no matching record,
+            create new record   */
+    /// ofstream -> adds information to patient record
+      
+}
+
+void viewRecord(User);
+{
+    // ifstream -> open patient record file with corresponding ID
+    // only view file
+}
+
