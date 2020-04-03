@@ -11,6 +11,7 @@
 #include "statistics.h"
 #include "ksuPatient.h"
 #include "coronaInfo.h"
+#include "bill.h"
 #include <string>
 #include <vector>
 
@@ -46,8 +47,11 @@ public:
 	coronaInfo object responsible for keeping track of total US and Ohio cases.
 	*/
 	coronaInfo nationalInfo;
-
-
+	
+	/**
+	Bill object responsible for keeping track of payment information.
+	*/
+	Bill bill;
 private:
 	/**
 	Helper function for generateAlert(). Responsible for publishing the details of the alert to the KSU website.
@@ -58,6 +62,13 @@ private:
 	Helper function for generateAlert(). Responsible for publishing the details of the alert to Flash Alerts.
 	*/
 	void notifyFlashAlerts();
+	
+	/**
+	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
+
+	@param patient The patient who's ID is being looked for in the system.
+	*/
+	bool checkID(ksuPatient patient);
 	
 	std::vector<ksuPatient> alertInfo; /*!< The collection of alert info to be published. */
 
