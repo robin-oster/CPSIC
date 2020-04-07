@@ -58,24 +58,11 @@ public:
 	Bill bill;
 private:
 	/**
-	Helper function for generateAlert(). Responsible for publishing the details of the alert to the KSU website.
-	*/
-	void notifyKSU();
-	
-	/**
-	Helper function for generateAlert(). Responsible for publishing the details of the alert to Flash Alerts.
-	*/
-	void notifyFlashAlerts();
-	
-	/**
 	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
 
 	@param patient The patient who's ID is being looked for in the system.
 	*/
 	bool checkID(ksuPatient patient);
-	
-	std::vector<ksuPatient> alertInfo; /*!< The collection of alert info to be published. */
-
 };
 
 #endif
