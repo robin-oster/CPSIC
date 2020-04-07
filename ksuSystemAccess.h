@@ -7,20 +7,18 @@
 #ifndef KSU_SYSTEM_ACCESS_H
 #define KSU_SYSTEM_ACCESS_H
 
-#include "systemControl.h"
-
 /**
 	@author Matthew Oster moster@kent.edu
 */
 
 class ksuSystemAccess {
 public:
-  /**
+	/**
 	Carries out the process of preparing, packaging, and sending an alert to the KSU website and Flash Alerts.
 	*/
 	void generateAlert();
 
-  std::vector<ksuPatient> alertInfo; /*!< The collection of alert info to be published. */
+  	std::vector<ksuPatient> alertInfo; /*!< The collection of alert info to be published. */
 
 private:
   /**
