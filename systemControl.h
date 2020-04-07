@@ -32,9 +32,8 @@ public:
 	bool logOn(int id, std::string password);
 
 	/**
-	Carries out the process of preparing, packaging, and sending an alert to the KSU website and Flash Alerts.
+	Ensures that information is up to date across the system.
 	*/
-	void generateAlert();
 	void networkUpdate();
 
 	/**
