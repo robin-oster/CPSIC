@@ -5,8 +5,8 @@
 
 */
 
-#ifndef SYSTEM_ACCESS_H
-#define SYSTEM_ACCESS_H
+#ifndef SYSTEM_CONTROL_H
+#define SYSTEM_CONTROL_H
 
 #include "statistics.h"
 #include "ksuPatient.h"
@@ -20,7 +20,7 @@
 	@author Matthew Oster moster@kent.edu
 */
 
-class systemAccess {
+class systemControl {
 public:
 	
 	/**
