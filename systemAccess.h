@@ -37,12 +37,16 @@ public:
 	void generateAlert();
 	void networkUpdate();
 
-
+	/**
+	Resposible for storing collection of registered patients.
+	*/
+	std::vector<ksuPatient> registeredPatients;
 
 	/**
 	Statistics object responsible for keeping track of KSU-HS patient information.
 	*/
 	Statistics statSet;
+	
 	/**
 	coronaInfo object responsible for keeping track of total US and Ohio cases.
 	*/
