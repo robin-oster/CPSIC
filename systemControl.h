@@ -8,7 +8,7 @@
 #ifndef SYSTEM_CONTROL_H
 #define SYSTEM_CONTROL_H
 
-#include "Statistics.h"
+#include "statistics.h"
 #include "ksuPatient.h"
 #include "coronaInfo.h"
 #include "bill.h"
