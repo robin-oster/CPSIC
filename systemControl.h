@@ -11,6 +11,7 @@
 #include "statistics.h"
 #include "ksuPatient.h"
 #include "coronaInfo.h"
+#include "bill.h"
 #include <string>
 #include <vector>
 
@@ -54,6 +55,11 @@ public:
 	coronaInfo object responsible for keeping track of total US and Ohio cases.
 	*/
 	coronaInfo nationalInfo;
+	
+	/**
+	Bill object responsible for keeping track of payment information.
+	*/
+	Bill bill;
 	
 private:
 	/**
