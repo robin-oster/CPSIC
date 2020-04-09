@@ -12,6 +12,9 @@ bool systemControl::logOn(int id, std::string password) {
 
 }
 
+void systemControl::logOff(){
+}
+
 void systemControl::networkUpdate() {
 
 }
