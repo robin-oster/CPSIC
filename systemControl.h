@@ -11,7 +11,6 @@
 #include "statistics.h"
 #include "ksuPatient.h"
 #include "coronaInfo.h"
-#include "bill.h"
 #include <string>
 #include <vector>
 
@@ -51,10 +50,6 @@ public:
 	*/
 	coronaInfo nationalInfo;
 	
-	/**
-	Bill object responsible for keeping track of payment information.
-	*/
-	Bill bill;
 private:
 	/**
 	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
