@@ -31,6 +31,11 @@ public:
 	bool logOn(int id, std::string password);
 
 	/**
+	Logs the current user out of the system.
+	*/
+	void logOff();
+	
+	/**
 	Ensures that information is up to date across the system.
 	*/
 	void networkUpdate();
