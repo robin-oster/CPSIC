@@ -8,17 +8,19 @@
 #include <iostream>
 using namespace std;
 
-void viewAppointment(schedule)
+/*
+void ksuPatient::viewAppointment(schedule)
 {
     
 }
 
-void registerAppointment(schedule)
+void ksuPatient::registerAppointment(schedule)
 {
     
 }
 
-void rescheduleAppointment(schedule)
+void ksuPatient::rescheduleAppointment(schedule)
 {
     
 }
+*/

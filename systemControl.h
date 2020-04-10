@@ -8,10 +8,10 @@
 #ifndef SYSTEM_CONTROL_H
 #define SYSTEM_CONTROL_H
 
-#include "statistics.h"
+//#include "statistics.h"
 #include "ksuPatient.h"
-#include "coronaInfo.h"
-#include "bill.h"
+//#include "coronaInfo.h"
+//#include "bill.h"
 #include <string>
 #include <vector>
 
@@ -29,7 +29,7 @@ public:
 	@param id The user's 8 digit KSU ID.
 	@param password The password to the account corresponding to the 8 digit ID.
 	*/
-	bool logOn(int id, std::string password);
+	void logOn();
 
 	/**
 	Logs the current user out of the system.
@@ -49,25 +49,29 @@ public:
 	/**
 	Statistics object responsible for keeping track of KSU-HS patient information.
 	*/
-	Statistics statSet;
+	//Statistics statSet;
 	
 	/**
 	coronaInfo object responsible for keeping track of total US and Ohio cases.
 	*/
-	coronaInfo nationalInfo;
+	//coronaInfo nationalInfo;
 	
 	/**
 	Bill object responsible for keeping track of payment information.
 	*/
+<<<<<<< HEAD
+	//Bill bill;
+=======
 	Bill bill;
 	
+>>>>>>> 0d7fd5f2fce50c60c8adabda02f27d882055972c
 private:
 	/**
-	Checks the patient's ID to see if they are already registered in the system. If so, return true. If not, return false.
+	Checks the user's info to find their corresponding database entry. Returns true if that user is in the database.
 
-	@param patient The patient who's ID is being looked for in the system.
+	@param thisUser The User who's info is being looked for in the database.
 	*/
-	bool checkID(ksuPatient patient);
+	bool verifyUser(User thisUser);
 };
 
 #endif

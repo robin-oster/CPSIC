@@ -8,6 +8,7 @@
 #include <iostream>
 using namespace std;
 
+/*
 void hsFaculty::viewSchedule(schedule)
 {
     //displays schedule
@@ -33,16 +34,16 @@ void hsFaculty::removeAvailableTimes(schedule)
     
 }
 
-void hsFaculty::showStats(statistics)
+void hsFaculty::showStats(Statistics stats)
 {
-    User::showStats(statistics); // displays base class function first
-    cout << "Patients Registered:\t\t" << statistics.getPatientCount() << endl;
-    cout << "  Flu like Symptoms:\t\t" << statistics.getFluCount() << "  /  " << statistics.getFluPercent() << endl;
-    cout << "# of Patients with Coronavirus:\t\t" << statistics.getCoronaCount() << "  /  " << statistics.getCoronaPercent() << endl;
-    cout << "# of Patients who saught Counseling:\t" << statistics.getCounselingCount() << "  /  " << statistics.getCounselingPercent << endl;
+    User::showStats(stats); // displays base class function first
+    cout << "Patients Registered:\t\t" << stats.getPatientCount() << endl;
+    cout << "  Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << endl;
+    cout << "# of Patients with Coronavirus:\t\t" << stats.getCoronaCount() << "  /  " << stats.getCoronaPercent() << endl;
+    cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent << endl;
 }
 
-void updateRecord(User, statistics);
+void updateRecord(User, Statistics)
 {
     /* system will ask questions, as faculty answers them pertaining the patient,
      answers will be wrote to file & statistics will be updated also  */
@@ -51,12 +52,13 @@ void updateRecord(User, statistics);
     /*  if no matching record,
             create new record   */
     /// ofstream -> adds information to patient record
-      
+/*
 }
 
-void viewRecord(User);
+void hsFaculty::viewRecord(User)
 {
     // ifstream -> open patient record file with corresponding ID
     // only view file
 }
 
+*/

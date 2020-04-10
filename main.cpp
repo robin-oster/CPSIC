@@ -6,12 +6,14 @@
 	Need a main to make a makefile
 */
 
-#include “User.h”
-#include “schedule.h”
-#include “statistics.h”
-#include “systemAccess.h”
-#include “bill.h”
-#include "coronaInfo.h"
+#include "User.h"
+#include "systemControl.h"
+
+//#include “schedule.h”
+//#include “statistics.h”
+//#include “systemAccess.h”
+//#include “bill.h”
+//#include "coronaInfo.h"
 
 #include <iostream>
 #include <iomanip>
@@ -34,7 +36,7 @@ int main()
 	 *
 	*/
 	
-	words = "ope.";
+	string words = "ope.";
 
 	cout << setw(30) <<  words << endl << endl;
 
