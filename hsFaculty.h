@@ -18,7 +18,13 @@
 class hsFaculty: private User
 {
 public:
-    
+	hsFaculty();
+	hsFaculty(const User& source);
+	hsFaculty(const hsFaculty& source);
+
+	hsFaculty operator=(const hsFaculty& source);
+	bool operator==(const hsFaculty& source);
+
     /**
      Displays the schedule.
      
@@ -63,6 +69,8 @@ public:
      @param User User must be passed to find record.
      */
     //void viewRecord(User);
+
+	
 
 private:
     /**

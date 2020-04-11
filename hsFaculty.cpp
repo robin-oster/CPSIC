@@ -8,6 +8,38 @@
 #include <iostream>
 using namespace std;
 
+
+hsFaculty::hsFaculty() {
+	User();
+}
+
+hsFaculty::hsFaculty(const User& source) {
+	User();
+	setID(source.getID());
+	setName(source.getName());
+	setPassword(source.getPassword());
+}
+
+hsFaculty::hsFaculty(const hsFaculty& source) {
+	User();
+	setID(source.getID());
+	setName(source.getName());
+	setPassword(source.getPassword());
+}
+
+hsFaculty hsFaculty::operator=(const hsFaculty& source) {
+	User();
+	setID(source.getID());
+	setName(source.getName());
+	setPassword(source.getPassword());
+}
+
+bool hsFaculty::operator==(const hsFaculty& source) {
+	if (getID() == source.getID() && getName() == source.getName() && getPassword() == source.getPassword())
+		return true;
+	else return false;
+}
+
 /*
 void hsFaculty::viewSchedule(schedule)
 {
