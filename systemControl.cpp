@@ -16,6 +16,7 @@ void systemControl::logOn() {
 	int id;
 	std::string password;
 
+
 	// User enters info
 	std::cout << "Please enter an ID and password.\n ID: ";
 	std::cin >> id;
@@ -25,10 +26,18 @@ void systemControl::logOn() {
 	User thisUser;
 	thisUser.setID(id); thisUser.setPassword(password); // Set user info
 	if (verifyUser(thisUser)) {	// If user has been found in the database
-		auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), thisUser);
-		if (userIt == registeredPatients.end() /*&& not faculty*/) //patient not yet registered, register them
-			registeredPatients.push_back(thisUser); // Need to distingush 
-		return;
+		if (thisUser.getID() != 00000001 && thisUser.getID() != 00000002 && thisUser.getID() != 00000003 &&
+			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values
+			ksuPatient ksuUser(thisUser);
+			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), ksuUser);
+			if (userIt == registeredPatients.end()) //patient not yet registered, register them
+				registeredPatients.push_back(thisUser); 
+			std::cout << "e";
+			return;
+		}
+		else { // user is hsFaculty
+			return;
+		};
 	}
 	else {
 		std::cout << "Invalid ID or password.\n";

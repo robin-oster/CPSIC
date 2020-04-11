@@ -20,6 +20,14 @@
 class ksuPatient: private User
 {
 public:
+	
+	ksuPatient();
+	ksuPatient(const ksuPatient& patient);
+	ksuPatient(User& user);
+
+	ksuPatient operator=(const ksuPatient& patient);
+	bool operator==(const ksuPatient& patient);
+
     /**
      Displays the user appointment.
      

@@ -60,7 +60,6 @@ public:
 	Bill object responsible for keeping track of payment information.
 	*/
 	//Bill bill;
-	
 private:
 	/**
 	Checks the user's info to find their corresponding database entry. Returns true if that user is in the database.

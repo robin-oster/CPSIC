@@ -9,7 +9,7 @@
 #ifndef USER_H
 #define USER_H
 
-#include "schedule.h"
+//#include "schedule.h"
 //#include "statistics.h"
 #include <string>
 using namespace std;
@@ -22,6 +22,11 @@ using namespace std;
 class User
 {
 public:
+	
+	User();
+	User(User& source);
+	User operator=(User& source);
+
     /**
      Displays current statistics of Coronavirus cases in Ohio & USA.
      
@@ -38,8 +43,12 @@ public:
 
 	bool operator==(User target);
 
-	void setID(int id) { ID = id; }
-	void setPassword(string pass) { password = pass; }
+	int getID() const { return ID; }
+	string getName() const { return name; }
+	string getPassword() const { return password; }
+	void setID(const int id) { ID = id; }
+	void setName(const string theName) { name = theName; }
+	void setPassword(const string pass) { password = pass; }
 
 private:
     int ID; /**< Identification number unique to each patient, assigned by the school. */

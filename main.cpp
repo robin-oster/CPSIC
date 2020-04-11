@@ -36,6 +36,11 @@ int main()
 	 *
 	*/
 	
+	systemControl E;
+	User mainUser;
+	E.logOn();
+
+
 	string words = "ope.";
 
 	cout << setw(30) <<  words << endl << endl;
