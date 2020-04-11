@@ -59,12 +59,8 @@ public:
 	/**
 	Bill object responsible for keeping track of payment information.
 	*/
-<<<<<<< HEAD
 	//Bill bill;
-=======
-	Bill bill;
 	
->>>>>>> 0d7fd5f2fce50c60c8adabda02f27d882055972c
 private:
 	/**
 	Checks the user's info to find their corresponding database entry. Returns true if that user is in the database.
