@@ -7,6 +7,7 @@
 #ifndef KSU_SYSTEM_ACCESS_H
 #define KSU_SYSTEM_ACCESS_H
 
+#include "ksuPatient.h"
 #include <vector>
 
 /**
