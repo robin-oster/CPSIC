@@ -18,13 +18,19 @@
 class hsFaculty: private User
 {
 public:
-    
+	hsFaculty();
+	hsFaculty(const User& source);
+	hsFaculty(const hsFaculty& source);
+
+	hsFaculty operator=(const hsFaculty& source);
+	bool operator==(const hsFaculty& source);
+
     /**
      Displays the schedule.
      
      @param Schedule An instance of the current schedule
      */
-    void viewSchedule(schedule);
+    //void viewSchedule(schedule);
     
     /**
      Allows user to add additional dates to semester schedule or
@@ -32,14 +38,14 @@ public:
      
      @param schedule An instance of the current schedule
      */
-    void editSchedule(schedule);
+    //void editSchedule(schedule);
     
     /**
      Remove available times to semester schedule
      
      @param schedule An instance of the currant schedule
      */
-    void removeAvailableTimes(schedule);
+    //void removeAvailableTimes(schedule);
     
     /**
      Displays current statistics of Coronavirus cases in Ohio & USA.
@@ -47,7 +53,7 @@ public:
      
      @param Statistics
      */
-    void showStats(statistics);
+    //void showStats(Statistics);
     
      /**
      Allows user to update patient record
@@ -55,14 +61,16 @@ public:
      @param User User must be passed to find record.
      @param statistics
      */
-    void updateRecord(User, statistics);
+    //void updateRecord(User, Statistics);
     
     /**
      Displays patient record.
      
      @param User User must be passed to find record.
      */
-    void viewRecord(User);
+    //void viewRecord(User);
+
+	
 
 private:
     /**
@@ -70,14 +78,14 @@ private:
      
      @param Schedule An instance of the current schedule
      */
-    void addDates(schedule);
+    //void addDates(schedule);
     
     /**
      removes dates from semester schedule
      
      @param Schedule An instance of the current schedule
      */
-    void removeDates(schedule);
+    //void removeDates(schedule);
    
 };
 
