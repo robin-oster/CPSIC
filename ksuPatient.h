@@ -10,11 +10,13 @@
 #define KSUPATIENT_H
 
 #include "User.h"
+#include <iostream>
 
 
 /**
  
     @author Daniel Stephan dstepha3@kent.edu
+	@author Matthew Oster moster@kent.edu
  */
 
 class ksuPatient: private User
@@ -23,10 +25,11 @@ public:
 	
 	ksuPatient();
 	ksuPatient(const ksuPatient& patient);
-	ksuPatient(User& user);
+	ksuPatient(const User& user);
 
 	ksuPatient operator=(const ksuPatient& patient);
 	bool operator==(const ksuPatient& patient);
+	friend ostream& operator<<(ostream& os, const ksuPatient& patient);
 
     /**
      Displays the user appointment.

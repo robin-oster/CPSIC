@@ -36,14 +36,16 @@ int main()
 	 *
 	*/
 	
-	systemControl E;
+	systemControl sys;
 	User mainUser;
-	E.logOn();
+	sys.logOn();
 
 
 	string words = "ope.";
 
-	cout << setw(30) <<  words << endl << endl;
-
+	for (auto i = sys.registeredPatients.begin(); i != sys.registeredPatients.end(); i++)
+		cout << *i;
+	if (sys.facultyAccess == true) cout << "\nAccess Granted";
+	else cout << "\nAccess denied";
 	return 0;
 }

@@ -32,6 +32,7 @@ hsFaculty hsFaculty::operator=(const hsFaculty& source) {
 	setID(source.getID());
 	setName(source.getName());
 	setPassword(source.getPassword());
+	return *this;
 }
 
 bool hsFaculty::operator==(const hsFaculty& source) {

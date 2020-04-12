@@ -21,6 +21,7 @@ User User::operator=(User& source) {
 	ID = source.getID();
 	name = source.getName();
 	password = source.getPassword();
+	return *this;
 }
 
 bool User::operator==(User target) {

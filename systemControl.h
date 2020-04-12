@@ -10,6 +10,7 @@
 
 //#include "statistics.h"
 #include "ksuPatient.h"
+#include "hsFaculty.h"
 //#include "coronaInfo.h"
 //#include "bill.h"
 #include <string>
@@ -45,6 +46,9 @@ public:
 	Resposible for storing collection of registered patients.
 	*/
 	std::vector<ksuPatient> registeredPatients;
+	ksuPatient patientUser;
+	hsFaculty facultyUser;
+	bool facultyAccess = false;
 
 	/**
 	Statistics object responsible for keeping track of KSU-HS patient information.

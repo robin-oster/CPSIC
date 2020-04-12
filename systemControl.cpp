@@ -18,7 +18,7 @@ void systemControl::logOn() {
 
 
 	// User enters info
-	std::cout << "Please enter an ID and password.\n ID: ";
+	std::cout << "Please enter an ID and password.\nID: ";
 	std::cin >> id;
 	std::cout << "Password: ";
 	std::cin >> password;
@@ -28,14 +28,15 @@ void systemControl::logOn() {
 	if (verifyUser(thisUser)) {	// If user has been found in the database
 		if (thisUser.getID() != 00000001 && thisUser.getID() != 00000002 && thisUser.getID() != 00000003 &&
 			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values
-			ksuPatient ksuUser(thisUser);
-			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), ksuUser);
+			patientUser = ksuPatient(thisUser);
+			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), patientUser);
 			if (userIt == registeredPatients.end()) //patient not yet registered, register them
 				registeredPatients.push_back(thisUser); 
-			std::cout << "e";
 			return;
 		}
 		else { // user is hsFaculty
+			facultyUser = hsFaculty(thisUser);
+			facultyAccess = true;
 			return;
 		};
 	}
