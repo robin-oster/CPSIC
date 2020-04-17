@@ -28,14 +28,16 @@ void systemControl::logOn() {
 	if (verifyUser(thisUser)) {	// If user has been found in the database
 		if (thisUser.getID() != 00000001 && thisUser.getID() != 00000002 && thisUser.getID() != 00000003 &&
 			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values
-			patientUser = ksuPatient(thisUser);
+			ksuPatient patientUser(thisUser, true);
 			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), patientUser);
-			if (userIt == registeredPatients.end()) //patient not yet registered, register them
-				registeredPatients.push_back(thisUser); 
+			if (userIt == registeredPatients.end()) { //patient not yet registered, register them
+				registeredPatients.push_back(patientUser);
+				statSet.incrementPatientCount();
+			}
 			return;
+			
 		}
 		else { // user is hsFaculty
-			facultyUser = hsFaculty(thisUser);
 			facultyAccess = true;
 			return;
 		};
@@ -51,6 +53,14 @@ void systemControl::logOff(){
 
 void systemControl::networkUpdate() {
 
+}
+
+void systemControl::calculateEarnings() {
+	for (auto i = registeredPatients.begin(); i != registeredPatients.end(); i++) {
+		practitionerEarnings += i->getPractitionerBill()->getPaidTotal();
+		counselorEarnings += i->getCounselorBill()->getPaidTotal();
+	}
+	totalEarnings = practitionerEarnings + counselorEarnings;
 }
 
 bool systemControl::verifyUser(User thisUser){

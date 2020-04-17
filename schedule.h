@@ -13,7 +13,6 @@
 //set namespace to std
 using namespace std;
 
-struct appointment;
 
 //schedule class
 class schedule {
@@ -41,7 +40,7 @@ public:
 
 	//saveAppt function
 	//saves appointment to schedule
-	void saveAppt(appointment appt);
+	void saveAppt(struct appointment appt);
 
 	//printSchedule Function
 	//Displays current schedule of appointments

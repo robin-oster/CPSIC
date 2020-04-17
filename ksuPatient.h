@@ -10,8 +10,9 @@
 #define KSUPATIENT_H
 
 #include "User.h"
+#include "bill.h"
 #include <iostream>
-
+#include <vector>
 
 /**
  
@@ -23,13 +24,22 @@ class ksuPatient: private User
 {
 public:
 	
-	ksuPatient();
+	ksuPatient() : User(), student(true) {}
+	ksuPatient(bool isStudent) : User(), student(isStudent) {}
 	ksuPatient(const ksuPatient& patient);
-	ksuPatient(const User& user);
+	ksuPatient(const User& user, bool isStudent);
 
 	ksuPatient operator=(const ksuPatient& patient);
 	bool operator==(const ksuPatient& patient);
 	friend ostream& operator<<(ostream& os, const ksuPatient& patient);
+
+	bool getStudentStatus() const { return student; }
+	const Bill* getPractitionerBill() const{ return &practitionerBill; }
+	const Bill* getCounselorBill() const { return &counselorBill; }
+	const string getName() const { return getName(); }
+
+	void addToPractitionerBill();
+	void addToCounselorBill();
 
     /**
      Displays the user appointment.
@@ -51,9 +61,11 @@ public:
      @param schedule An instance of the current schedule
      */
     //void rescheduleAppointment(schedule);
-    
-private:
 
+private:
+	bool student;
+	Bill practitionerBill;
+	Bill counselorBill;
 };
 
 #endif

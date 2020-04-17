@@ -10,6 +10,7 @@
 #define HSFACULTY_H
 
 #include "User.h"
+#include "statistics.h"
 
 /**
     @author Daniel Stephan dstepha3@kent.edu
@@ -51,9 +52,9 @@ public:
      Displays current statistics of Coronavirus cases in Ohio & USA.
      Displays Coronavirus related statistics of HS Facility.
      
-     @param Statistics
+     @param nationalStats stats
      */
-    //void showStats(Statistics);
+    void showStats(coronaInfo nationalStats, Statistics stats);
     
      /**
      Allows user to update patient record
@@ -73,6 +74,7 @@ public:
 	
 
 private:
+
     /**
      Adds additional dates to semester schedule
      

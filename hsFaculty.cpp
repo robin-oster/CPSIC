@@ -14,21 +14,18 @@ hsFaculty::hsFaculty() {
 }
 
 hsFaculty::hsFaculty(const User& source) {
-	User();
 	setID(source.getID());
 	setName(source.getName());
 	setPassword(source.getPassword());
 }
 
 hsFaculty::hsFaculty(const hsFaculty& source) {
-	User();
 	setID(source.getID());
 	setName(source.getName());
 	setPassword(source.getPassword());
 }
 
 hsFaculty hsFaculty::operator=(const hsFaculty& source) {
-	User();
 	setID(source.getID());
 	setName(source.getName());
 	setPassword(source.getPassword());
@@ -66,16 +63,17 @@ void hsFaculty::removeAvailableTimes(schedule)
 {
     
 }
-
-void hsFaculty::showStats(Statistics stats)
+*/
+void hsFaculty::showStats(coronaInfo nationalStats, Statistics stats)
 {
-    User::showStats(stats); // displays base class function first
+    User::showStats(nationalStats); // displays base class function first
     cout << "Patients Registered:\t\t" << stats.getPatientCount() << endl;
     cout << "  Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << endl;
     cout << "# of Patients with Coronavirus:\t\t" << stats.getCoronaCount() << "  /  " << stats.getCoronaPercent() << endl;
-    cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent << endl;
+    cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << endl;
 }
 
+/*
 void updateRecord(User, Statistics)
 {
     /* system will ask questions, as faculty answers them pertaining the patient,

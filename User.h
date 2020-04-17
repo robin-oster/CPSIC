@@ -10,7 +10,7 @@
 #define USER_H
 
 //#include "schedule.h"
-//#include "statistics.h"
+#include "coronaInfo.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -18,6 +18,7 @@ using namespace std;
 /**
  
     @author Daniel Stephan dstepha3@kent.edu
+	@author Matthew Oster moster@kent.edu
 */
 
 class User
@@ -35,11 +36,11 @@ public:
      */
     
 
-	//void showStats(Statistics)
-    // {
-    //     cout << "Coronavirus cases in Ohio:\t" << /*cases*/ << endl;
-    //     cout << "Coronavirus cases in  USA:\t" << /*cases*/ << endl;
-    // }
+	void showStats(coronaInfo stats)
+    {
+		cout << "Coronavirus cases in Ohio:\t" << /*cases <<*/ endl;
+		cout << "Coronavirus cases in USA:\t" << /*cases <<*/ endl;
+	}
 
 
 	bool operator==(User target);

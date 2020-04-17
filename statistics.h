@@ -16,13 +16,9 @@
 
 class Statistics {
 public:
+	Statistics();
 
-	/**
-	Logs a new patient into the system's collection of registered patients.
-	@param patient The patient to be logged into the collection.
-	*/
-	void logNewPatient(ksuPatient patient);
-
+	void incrementPatientCount() { patientCount++; }
 	/**
 	Increments fluCount.
 	*/
@@ -30,7 +26,7 @@ public:
 	/**
 	Increments coronaCount.
 	*/
-	ksuPatient incrementCoronaCount();
+	void incrementCoronaCount() { coronaCount++;}
 	/**
 	Increments counselingCount.
 	*/
