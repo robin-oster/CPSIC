@@ -6,7 +6,7 @@ CXXFLAGS = -Wall
 #----------------------------------------------------------------------------
 
 main:	User.o schedule.o statistics.o systemAccess.o bill.o coronaInfo.o main.o
-${CXX} ${CXXFLAGS} User.o schedule.o statistics.o systemAccess.o bill.o coronaInfo.o main.o -o CPSIC 
+	${CXX} ${CXXFLAGS} User.o schedule.o statistics.o systemAccess.o bill.o coronaInfo.o main.o -o CPSIC 
 
 User.o:	User.h ksuPatient.h ksuPatient.cpp hsFaculty.h hsFaculty.cpp
 
