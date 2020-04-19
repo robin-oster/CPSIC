@@ -83,23 +83,21 @@ void updateRecord(schedule schedule, User faculty, Statistics *stats)
     User patient;
     systemControl sys;
     
-    ofstream o_stream;
-    stringstream s_stream;
-    
-    int id;
-    string fileName, notes;
-    bool checked = false;
-    bool another = false;
-    bool counselling, flu, tested_corona, positive_corona;
-    
     cout << endl;
     
     do
     {
-        another = false;
+        bool another = false;
         
         do
         {
+            int id;
+            string fileName, notes;
+            ofstream o_stream;
+  	    stringstream s_stream;
+	    bool checked = false;
+            bool counselling, flu, tested_corona, positive_corona;
+
             cout << "\nEnter Patient ID: #";
             cin >> id;
         
@@ -225,23 +223,21 @@ void hsFaculty::viewRecord()
 {
     User patient;
     systemControl sys;
-       
-    ifstream i_stream;
-    stringstream s_stream;
-       
-    int ID;
-    string fileName;
-    bool another = false;
-    bool checked = false;
-       
+    
     cout << endl;
 
     do
     {
-        another = false;
+        bool another = false;
     
         do
         {
+  	    int ID;
+     	    string fileName;
+  	    ifstream i_stream;
+  	    stringstream s_stream;
+  	    bool checked = false;
+		
             cout << "\nEnter Patient ID to view: #";
             cin >> ID;
            
