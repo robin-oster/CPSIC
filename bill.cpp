@@ -1,4 +1,6 @@
 #include "bill.h"
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 /*
@@ -12,6 +14,21 @@ void Bill::setBill(double amt, schedule issue) {
 	issueDate = issue.getDate();
 }
 
+void Bill::showBill() {
+	cout << fixed << setprecision(2) << setfill('0');
+	cout << "==========================================================\n";
+	cout << "Total Balance: $" << amount << endl;
+	cout << "Issue Date: " << issueDate << endl;
+	cout << "Paid Balance: $" << paidTotal << endl;
+	cout << "Unpaid Balance: $" << unpaidTotal << endl;
+
+	if (paidTotal >= amount)
+		cout << "Paid Date: " << paidDate << endl;
+
+	cout << "=========================================================\n";
+
+}
+
 void Bill::payBill(double amt) {
 	if (paid == false) {
 		paidTotal += amt;
@@ -21,5 +38,5 @@ void Bill::payBill(double amt) {
 			paidDate = "today";
 		}
 	}
-	else cout << "\nYour bill is aleady paid in full.";
+	else cout << "Your bill is aleady paid in full.\n";
 }

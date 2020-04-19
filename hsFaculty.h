@@ -62,14 +62,14 @@ public:
      @param User User must be passed to find record.
      @param statistics
      */
-    void updateRecord(User, User faculty, Statistics* stats);
+    void updateRecord(schedule, User faculty, systemControl &sys);
     
     /**
      Displays patient record.
      
      @param User User must be passed to find record.
      */
-    void viewRecord(User);
+    void viewRecord(const systemControl &sys);
 
 	
 

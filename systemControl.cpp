@@ -27,7 +27,7 @@ void systemControl::logOn() {
 	thisUser.setID(id); thisUser.setPassword(password); // Set user info
 	if (verifyUser(thisUser)) {	// If user has been found in the database
 		if (thisUser.getID() != 00000001 && thisUser.getID() != 00000002 && thisUser.getID() != 00000003 &&
-			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values
+			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values?
 			ksuPatient patientUser(thisUser, true);
 			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), patientUser);
 			if (userIt == registeredPatients.end()) { //patient not yet registered, register them
@@ -63,7 +63,7 @@ void systemControl::calculateEarnings() {
 	totalEarnings = practitionerEarnings + counselorEarnings;
 }
 
-bool systemControl::verifyUser(User thisUser){
+bool systemControl::verifyUser(User thisUser) const{
 	// find user in database
 	return true;
 }

@@ -46,7 +46,7 @@ public:
 
 	@param thisUser The User who's info is being looked for in the database.
 	*/
-	bool verifyUser(User thisUser);
+	bool verifyUser(User thisUser) const;
 	
 private:
 	double practitionerEarnings;

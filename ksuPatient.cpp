@@ -15,8 +15,8 @@ ksuPatient::ksuPatient(const ksuPatient& patient) {
 	setName(patient.getName());
 	setPassword(patient.getPassword());
 	student = patient.getStudentStatus();
-	for (auto i = patient.getBillList()->begin(); i != patient.getBillList()->end(); i++)
-		billList.push_back(*i);
+	practitionerBill = *(patient.getPractitionerBill());
+	counselorBill = *(patient.getCounselorBill());
 }
 
 ksuPatient::ksuPatient(const User& user, bool isStudent) {
@@ -43,28 +43,30 @@ bool ksuPatient::operator==(const ksuPatient& patient) {
 ostream& operator<<(ostream& os, const ksuPatient& patient) {
 	os << "ID: " << patient.getID() << endl;
 	os << "Name: " << patient.getName() << endl;
+	if (student == true) os << "Student\n";
+	else os << "Not student\n";
 	return os;
 }
 
-void ksuPatient::addToPractitionerBill() {
+void ksuPatient::addToPractitionerBill(const schedule &sched) {
 	if (practitionerBill.getAmount() == 0) {
-		if (student == true) practitionerBill.setBill(10, "today");
-		else practitionerBill.setBill(30, "today");
+		if (student == true) practitionerBill.setBill(10, sched);
+		else practitionerBill.setBill(30, sched);
 	}
 	else {
-		if (student == true) practitionerBill.addToBill(10);
-		else practitionerBill.addToBill(30);
+		if (student == true) practitionerBill.addToBill(10, sched);
+		else practitionerBill.addToBill(30, sched);
 	}
 }
 
-void ksuPatient::addToCounselorBill() {
+void ksuPatient::addToCounselorBill(const schedule &sched) {
 	if (counselorBill.getAmount() == 0) {
-		if (student == true) counselorBill.setBill(10, "today");
-		else counselorBill.setBill(30, "today");
+		if (student == true) counselorBill.setBill(10, sched);
+		else counselorBill.setBill(30, sched);
 	}
 	else {
-		if (student == true) counselorBill.addToBill(10);
-		else counselorBill.addToBill(30);
+		if (student == true) counselorBill.addToBill(10, sched);
+		else counselorBill.addToBill(30, sched);
 	}
 }
 

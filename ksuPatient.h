@@ -34,12 +34,14 @@ public:
 	friend ostream& operator<<(ostream& os, const ksuPatient& patient);
 
 	bool getStudentStatus() const { return student; }
-	const Bill* getPractitionerBill() const{ return &practitionerBill; }
+	const Bill* getPractitionerBill() const { return &practitionerBill; }
 	const Bill* getCounselorBill() const { return &counselorBill; }
 	const string getName() const { return getName(); }
 
-	void addToPractitionerBill();
-	void addToCounselorBill();
+	void addToPractitionerBill(const schedule &sched);
+	void addToCounselorBill(const schedule &sched);
+	void showPractitionerBill() { std::cout << "PRACTITIONER BILL\n"; practitionerBill.showBill(); }
+	void showCounselorBill() { std::cout << "COUNSELOR BILL\n"; counselorBill.showBill(); }
 
     /**
      Displays the user appointment.

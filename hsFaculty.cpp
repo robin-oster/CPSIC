@@ -78,25 +78,24 @@ void hsFaculty::showStats(coronaInfo nationalStats, Statistics stats)
     cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << endl;
 }
 
-void updateRecord(schedule schedule, User faculty, Statistics *stats)
+void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys)
 {
     User patient;
-    systemControl sys;
-    
+	bool another = false;
+
     cout << endl;
     
     do
     {
-        bool another = false;
-        
+		int id;
+		string fileName, notes;
+		ofstream o_stream;
+		stringstream s_stream;
+		bool checked = false;
+		bool counselling, flu, tested_corona, positive_corona;
+
         do
         {
-            int id;
-            string fileName, notes;
-            ofstream o_stream;
-  	    stringstream s_stream;
-	    bool checked = false;
-            bool counselling, flu, tested_corona, positive_corona;
 
             cout << "\nEnter Patient ID: #";
             cin >> id;
@@ -143,7 +142,7 @@ void updateRecord(schedule schedule, User faculty, Statistics *stats)
             if (counselling)
             {
                 o_stream << "YES";
-                stats->incrementCounselingCount();
+                sys.statSet.incrementCounselingCount();
             }
             else
             {
@@ -159,7 +158,7 @@ void updateRecord(schedule schedule, User faculty, Statistics *stats)
             if (flu)
             {
                 o_stream << "YES";
-                stats->incrementFluCount();
+                sys.statSet.incrementFluCount();
             }
             else
             {
@@ -188,7 +187,7 @@ void updateRecord(schedule schedule, User faculty, Statistics *stats)
             if (positive_corona)
             {
                 o_stream << "YES";
-                stats->incrementCoronaCount();
+                sys.statSet.incrementCoronaCount();
             }
             else
             {
@@ -219,24 +218,23 @@ void updateRecord(schedule schedule, User faculty, Statistics *stats)
     } while (another);
 }
 
-void hsFaculty::viewRecord()
+void hsFaculty::viewRecord(const systemControl &sys)
 {
     User patient;
-    systemControl sys;
-    
+	bool another = false;
+
     cout << endl;
 
     do
     {
-        bool another = false;
-    
+		int ID;
+		string fileName;
+		ifstream i_stream;
+		stringstream s_stream;
+		bool checked = false;
+
         do
         {
-  	    int ID;
-     	    string fileName;
-  	    ifstream i_stream;
-  	    stringstream s_stream;
-  	    bool checked = false;
 		
             cout << "\nEnter Patient ID to view: #";
             cin >> ID;
