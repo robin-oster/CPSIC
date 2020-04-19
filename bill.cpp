@@ -6,18 +6,20 @@ using namespace std;
 	Declaration file for the class Bill.
 */
 
-void Bill::setBill(double, string, bool) {
-
+void Bill::setBill(double amt, schedule issue) {
+	amount = amt;
+	unpaidTotal = amt;
+	issueDate = issue.getDate();
 }
-void Bill::getBill() {
 
-}
-double Bill::getPaidTotal() {
-
-}
-double Bill::getUnpaidTotal() {
-
-}
-void Bill::payBill() {
-
+void Bill::payBill(double amt) {
+	if (paid == false) {
+		paidTotal += amt;
+		unpaidTotal -= amt;
+		if (paidTotal >= amount) {
+			paid = true;
+			paidDate = "today";
+		}
+	}
+	else cout << "\nYour bill is aleady paid in full.";
 }

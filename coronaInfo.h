@@ -2,18 +2,15 @@
 /*
 	coronaInfo.h
 	Declaration file for class Statistics.
-
 */
 
 #ifndef CORONA_INFO_H
 #define CORONA_INFO_H
 
 /**
-
 	@author Matthew Oster moster@kent.edu
 */
 
-#include "ksuPatient.h"
 #include <vector>
 
 class coronaInfo {
@@ -21,7 +18,7 @@ public:
 	/**
 	Updates ohioCount based on national database data.
 	*/
-	std::vector<ksuPatient> updateOhioCount();
+	void updateOhioCount();
 	/**
 	Updates usCount based on national database data
 	*/

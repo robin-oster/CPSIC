@@ -1,0 +1,31 @@
+Executable Release: 1 - Users
+Goal: 
+Registering a user, and keeping track of their respective case files. 
+Classes to be implemented: user, hsFaculty, ksuPatient  
+Previously implemented classes to use:  NA  
+Use case to be implemented:  
+Inputs: A username and password, ksuPatient information  
+Outputs: Different sections based on username/password, full case file from ksuPatient information search
+Time for completion: Saturday April 11, 2020
+
+
+Executable Release: 2 - Schedule
+Goal: 
+Setting a schedule and allowing for its modification based on the Fall 2020 semester, taking care of bills by patients and keeping track of payment information 
+Classes to be implemented: schedule, bill
+Previously implemented classes to use:  ksuPatient, hsFaculty
+Use case to be implemented:  
+Inputs: A username to find bill information, date to schedule a visit
+Outputs: Confirmation about bill payment or visit scheduled
+Time for completion: Saturday April 18, 2020
+
+
+Executable Release: 3 – Corona Info
+Goal: 
+Web screening coronavirus info for Ohio and the United States, keeping track of coronoavirus cases on campus, applying this information visibly
+Classes to be implemented: coronaInfo, statistics
+Previously implemented classes to use:  ksuPatient
+Use case to be implemented:  
+Inputs: Which section to be viewed as a graph, new information to add
+Outputs: Graphs
+Time for completion: Saturday April 25, 2020

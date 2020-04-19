@@ -1,8 +1,7 @@
 #pragma once
-/* 
+/*
 	statistics.h
 	Declaration file for class Statistics.
-
 */
 
 #ifndef STATISTICS_H
@@ -12,20 +11,14 @@
 #include <vector>
 
 /**
-
 	@author Matthew Oster moster@kent.edu
 */
 
 class Statistics {
 public:
+	Statistics();
 
-	/**
-	Logs a new patient into the system's collection of registered patients.
-
-	@param patient The patient to be logged into the collection.
-	*/
-	void logNewPatient(ksuPatient patient);
-
+	void incrementPatientCount() { patientCount++; }
 	/**
 	Increments fluCount.
 	*/
@@ -33,12 +26,12 @@ public:
 	/**
 	Increments coronaCount.
 	*/
-	ksuPatient incrementCoronaCount();
+	void incrementCoronaCount() { coronaCount++;}
 	/**
 	Increments counselingCount.
 	*/
 	void incrementCounselingCount() { counselingCount++; }
-	
+
 	/**
 	Calculates the percentages of patients who exhibit flu-like symptoms, the percentage who have contracted Coronavirus,
 	and the percentage who have sought counseling for Coronavirus-related reasons.

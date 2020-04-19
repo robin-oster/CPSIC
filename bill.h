@@ -2,36 +2,38 @@
 /*
 	bill.h
 	Declaration file for class Bill
-
 */
 #include <iostream>
 using namespace std;
 /**
 	Author Jake Davis jdavi205@kent.edu
+	@author Matthew Oster moster@kent.edu
 */
+
+#include "schedule.h"
 
 class Bill {
 public:
-	/*
-		Constructor class to set bill.
-	*/
-	void setBill(double, string, bool);
-	/*
-		Retrieves variables from private; amount, issueDate, paidDate (if applicable), and paid.
-	*/
-	void getBill();
-	/*
-		Retrieves variable paidTotal.
-	*/
-	double getPaidTotal();
-	/*
-		Retrieves variable unpaidTotal.
-	*/
-	double getUnpaidTotal();
+
+	/** Constructor */
+	Bill(): amount(0), issueDate(""), paidDate(""), paidTotal(0), unpaidTotal(0), paid(false) {}
+
+	void setBill(double amt, schedule issue); /*!<Set the amount, issueDate, and unpaid total.*/
+	void addToBill(double amt) { amount += amt; unpaidTotal += amt; }
+
 	/*
 		Sets bill to paid, provided the correct payment information is recieved.
 	*/
-	void payBill();
+	void payBill(double amt);
+
+	// Accessor methods
+	double getAmount() { return amount; }
+	string getDate() { return issueDate; }
+	string getPaidDate() { return paidDate; }
+	double getPaidTotal() const { return paidTotal; }
+	double getUnpaidTotal() { return unpaidTotal; }
+	bool getPaymentStatus() { return paid; }
+
 private:
 	double amount; //Total amount of the individual bill, depending on ksuPatient
 	string issueDate; //Date of the bill being issued
@@ -39,5 +41,5 @@ private:
 	double paidTotal; //Total amount paid to either the Health or Counseling service
 	double unpaidTotal; //Total amount to be paid to either the Health or Counseling service
 	bool paid; //Checks whether a bill has been paid (true) or unpaid (false)
-	
+
 };
