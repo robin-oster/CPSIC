@@ -41,7 +41,6 @@ public:
 	Statistics statSet; /*!<Statistics object keeping track of statistical info*/
 	coronaInfo nationalInfo; /*!<coronaInfo object responsible for keeping track of total US and Ohio cases.*/
 	
-private:
 	/**
 	Checks the user's info to find their corresponding database entry. Returns true if that user is in the database.
 
@@ -49,6 +48,7 @@ private:
 	*/
 	bool verifyUser(User thisUser);
 	
+private:
 	double practitionerEarnings;
 	double counselorEarnings;
 	double totalEarnings;
