@@ -46,36 +46,50 @@ bool hsFaculty::operator==(const hsFaculty& source) {
 
 void hsFaculty::viewSchedule(schedule my_schedule)
 {
-    //displays schedule
-	cout << "-----------------------------------------------------------------------------------------------------------------\n";
-	cout << "Schedule for:\t\t\t\t\t" << my_schedule.getDate() << endl;
-	cout << "Timeslots:\t\t\t\t\t" << "10:00\t\t" << "10:30\t\t" << "11:00\t\t" << "11:30\t\t" << "12:00\t\t" << "12:30\t\t" <<
-		"1:00\t\t" << "1:30\t\t" << "2:00\t\t" << "2:30\t\t" << "3:00\t\t" << "3:30" << endl;
-	
-
+    my_schedule.printSchedule();
 }
 
-/*
-void hsFaculty::editSchedule(schedule)
+
+void hsFaculty::editSchedule(schedule my_schedule)
 {
+    int choice;
     //ask if user wants to add dates or remove dates & enters those functions
+    cout << "Enter 1 if you wish to add a date, or 2 if you wish to remove one: ";
+    cin >> choice;
+    while (choice != 1 && choice != 2) {
+        cout << "Invalid input.\n";
+        cout << "Enter 1 if you wish to add a date, or 2 if you wish to remove one: ";
+        cin >> choice;
+    }
+    
+    if (choice == 1) addDates(my_schedule);
+    else removeDates(my_schedule);
 }
 
-void hsFaculty::addDates(schedule)
+
+void hsFaculty::addDates(schedule my_schedule)
 {
     // adds new dates to semester schedule
+    date::year_month_day ymd;
+    cout << "Enter year: ";
+    cin >> ymd.year;
+    cout << "Enter month: ";
+    cin >> ymd.month;
+    cout << "Enter day: ";
+    cin >> ymd.day;
+
+    my_schedule.setDate(ymd);
 }
 
-void hsFaculty::removeDates(schedule)
+void hsFaculty::removeDates(schedule my_schedule)
 {
     //removes dates from semester schedule
 }
 
-void hsFaculty::removeAvailableTimes(schedule)
+void hsFaculty::removeAvailableTimes(schedule my_schedule)
 {
     
 }
-*/
 
 void hsFaculty::showStats(coronaInfo nationalStats, Statistics stats)
 {

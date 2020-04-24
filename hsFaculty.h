@@ -42,14 +42,14 @@ public:
      
      @param schedule An instance of the current schedule
      */
-    //void editSchedule(schedule);
+    void editSchedule(schedule);
     
     /**
      Remove available times to semester schedule
      
      @param schedule An instance of the currant schedule
      */
-    //void removeAvailableTimes(schedule);
+    void removeAvailableTimes(schedule);
     
     /**
      Displays current statistics of Coronavirus cases in Ohio & USA.
@@ -83,14 +83,14 @@ private:
      
      @param Schedule An instance of the current schedule
      */
-    //void addDates(schedule);
+    void addDates(schedule);
     
     /**
      removes dates from semester schedule
      
      @param Schedule An instance of the current schedule
      */
-    //void removeDates(schedule);
+    void removeDates(schedule);
    
 };
 

@@ -20,7 +20,7 @@ public:
 	Statistics(const Statistics& src) : patientCount(src.patientCount), fluCount(src.fluCount), coronaCount(src.coronaCount),
 		counselingCount(src.counselingCount), fluPercent(src.fluPercent), coronaPercent(src.coronaPercent), counselingPercent(src.counselingPercent) {}
 
-	void incrementPatientCount() { patientCount++; }
+	void setPatientCount(int num) { patientCount = num; }
 	/**
 	Increments fluCount.
 	*/

@@ -95,6 +95,14 @@ void systemControl::visualizeStats() {
 	cout << "\n\n";
 	cout << "PERCENTAGE OF KSU-HS CLIENTS EXHIBITING FLU-LIKE CONDITIONS\n";
 
+	cout << "\n\n";
+	cout << "PERCENTAGE OF KSU-HS CLIENTS WITH CORONAVIRUS\n";
+
+	cout << "\n\n";
+	cout << "PERCENTAGE OF KSU-HS CLIENTS WHO'VE BEEN TO COUNSELING\n";
+
+
+
 }
 
 void systemControl::calculateEarnings() {
