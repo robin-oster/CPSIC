@@ -1,18 +1,41 @@
+#pragma once
 
 //schedule.h
 
 //Header File for schedule class
+
+#ifndef SCHEDULE_H
+#define SCHEDULE_H
 
 //Include necessary directories
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <chrono>
-#include "ksuPatient.h"
+#include <ctime>
+#include <date.h>
 #include "hsFaculty.h"
 
 //set namespace to std
 using namespace std;
+
+/**
+	@author Jakob Gojkov
+	@author Matthew Oster moster@kent.edu
+*/
+
+class ksuPatient;
+class hsFaculty;
+
+//apppointment structure
+//appointments saved to schedule
+struct appointment {
+	//appointment data types
+	date::year_month_day date;
+	date::time_of_day<chrono::seconds> timeslot;
+	ksuPatient* patient;
+	hsFaculty* faculty;
+};
 
 //schedule class
 class schedule {
@@ -21,20 +44,21 @@ class schedule {
 	public:
 		
 		//constructor
-		schedule Schedule();
+		schedule();
+		schedule(const schedule& src);
 		
 		//printAppt function
 		//Displays appointment
 		void printAppt(appointment appt);
 		
 		//get and set functions
-		year_month_day getDate();
-		time_of_day getTimeslot();
+		date::year_month_day getDate();
+		date::time_of_day<chrono::seconds> getTimeslot();
 		ksuPatient getPatient();
-		hsFacuty getStaff();
+		hsFaculty getStaff();
 		
-		void setDate(time_t);
-		void setTimeslot(time_t timeslot);
+		void setDate(date::year_month_day);
+		void setTimeslot(date::time_of_day<chrono::seconds> timeslot);
 		void setPatient(ksuPatient patient);
 		void setStaff(hsFaculty faculty);
 		
@@ -50,14 +74,7 @@ class schedule {
 		//schedule file stream
 		ifstream iSchedule;
 		ofstream oSchedule;
-		
-		//apppointment structure
-		//appointments saved to schedule
-		struct appointment {
-			//appointment data types
-			year_month_day date;
-			time_of day timeslot;
-			ksuPatient patient;
-			hsFaculty faculty
-		};
+		appointment appt;
 };
+
+#endif

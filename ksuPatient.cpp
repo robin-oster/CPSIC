@@ -21,7 +21,7 @@ ksuPatient::ksuPatient(const ksuPatient& patient) {
 
 ksuPatient::ksuPatient(const User& user, bool isStudent) {
 	setID(user.getID());
-	setName(user.getName());
+	setName(user.getUserName());
 	setPassword(user.getPassword());
 	student = isStudent;
 }
@@ -43,7 +43,7 @@ bool ksuPatient::operator==(const ksuPatient& patient) {
 ostream& operator<<(ostream& os, const ksuPatient& patient) {
 	os << "ID: " << patient.getID() << endl;
 	os << "Name: " << patient.getName() << endl;
-	if (student == true) os << "Student\n";
+	if (patient.getStudentStatus() == true) os << "Student\n";
 	else os << "Not student\n";
 	return os;
 }

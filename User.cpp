@@ -13,13 +13,13 @@ User::User() {
 
 User::User(User& source) {
 	ID = source.getID();
-	name = source.getName();
+	name = source.getUserName();
 	password = source.getPassword();
 }
 
 User User::operator=(User& source) {
 	ID = source.getID();
-	name = source.getName();
+	name = source.getUserName();
 	password = source.getPassword();
 	return *this;
 }

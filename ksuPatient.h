@@ -10,9 +10,12 @@
 #define KSUPATIENT_H
 
 #include "User.h"
+#include "schedule.h"
 #include "bill.h"
 #include <iostream>
 #include <vector>
+
+class schedule;
 
 /**
  
@@ -33,15 +36,15 @@ public:
 	bool operator==(const ksuPatient& patient);
 	friend ostream& operator<<(ostream& os, const ksuPatient& patient);
 
-	bool getStudentStatus() const { return student; }
-	const Bill* getPractitionerBill() const { return &practitionerBill; }
-	const Bill* getCounselorBill() const { return &counselorBill; }
-	const string getName() const { return getName(); }
-
-	void addToPractitionerBill(const schedule &sched);
-	void addToCounselorBill(const schedule &sched);
+	void addToPractitionerBill(const schedule& sched);
+	void addToCounselorBill(const schedule& sched);
 	void showPractitionerBill() { std::cout << "PRACTITIONER BILL\n"; practitionerBill.showBill(); }
 	void showCounselorBill() { std::cout << "COUNSELOR BILL\n"; counselorBill.showBill(); }
+
+    bool getStudentStatus() const { return student; }
+	const Bill* getPractitionerBill() const { return &practitionerBill; }
+	const Bill* getCounselorBill() const { return &counselorBill; }
+	const string getName() const { return getUserName(); }
 
     /**
      Displays the user appointment.

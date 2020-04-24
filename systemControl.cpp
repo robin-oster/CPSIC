@@ -5,11 +5,13 @@
 */
 
 #include "systemControl.h"
-#include "ksuPatient.h"
 #include <algorithm>
 #include <string>
 #include <iostream>
 
+/**
+	@author Matthew Oster moster@kent.edu
+*/
 
 // Still have to implement database and find a way to distinguish ksuPatient from hsFaculty
 void systemControl::logOn() {
@@ -32,7 +34,6 @@ void systemControl::logOn() {
 			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), patientUser);
 			if (userIt == registeredPatients.end()) { //patient not yet registered, register them
 				registeredPatients.push_back(patientUser);
-				statSet.incrementPatientCount();
 			}
 			return;
 			
@@ -52,6 +53,47 @@ void systemControl::logOff(){
 }
 
 void systemControl::networkUpdate() {
+
+}
+
+void systemControl::visualizeStats() {
+	cout << "CORONAVIRUS CASES IN THE US\n";
+	for (auto i = nationalInfo.begin(); i != nationalInfo.end(); i++) {
+		for (auto j = 0; j <= i->getUSCount() / 50; j++) {
+			cout << "x\n";
+		}
+		cout << " ";
+	}
+	
+	cout << "\n\n";
+	cout << "CORONAVIRUS CASES IN OHIO\n";
+	for (auto i = nationalInfo.begin(); i != nationalInfo.end(); i++) {
+		for (auto j = 0; j <= i->getOhioCount(); j++) {
+			cout << "x\n";
+		}
+		cout << " ";
+	}
+
+	cout << "\n\n";
+	cout << "CORONAVIRUS CASES AT KSU\n";
+	for (auto i = statSet.begin(); i != statSet.end(); i++) {
+		for (auto j = 0; j <= i->getCoronaCount(); j++) {
+			cout << "x\n";
+		}
+		cout << " ";
+	}
+
+	cout << "\n\n";
+	cout << "TOTAL NUMBER OF KSU-HS CLIENTS\n";
+	for (auto i = statSet.begin(); i != statSet.end(); i++) {
+		for (auto j = 0; j <= i->getPatientCount(); j++) {
+			cout << "x\n";
+		}
+		cout << " ";
+	}
+
+	cout << "\n\n";
+	cout << "PERCENTAGE OF KSU-HS CLIENTS EXHIBITING FLU-LIKE CONDITIONS\n";
 
 }
 

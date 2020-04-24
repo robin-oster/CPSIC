@@ -20,7 +20,7 @@ hsFaculty::hsFaculty() {
 
 hsFaculty::hsFaculty(const User& source) {
 	setID(source.getID());
-	setName(source.getName());
+	setName(source.getUserName());
 	setPassword(source.getPassword());
 }
 
@@ -43,12 +43,19 @@ bool hsFaculty::operator==(const hsFaculty& source) {
 	else return false;
 }
 
-/*
-void hsFaculty::viewSchedule(schedule)
+
+void hsFaculty::viewSchedule(schedule my_schedule)
 {
     //displays schedule
+	cout << "-----------------------------------------------------------------------------------------------------------------\n";
+	cout << "Schedule for:\t\t\t\t\t" << my_schedule.getDate() << endl;
+	cout << "Timeslots:\t\t\t\t\t" << "10:00\t\t" << "10:30\t\t" << "11:00\t\t" << "11:30\t\t" << "12:00\t\t" << "12:30\t\t" <<
+		"1:00\t\t" << "1:30\t\t" << "2:00\t\t" << "2:30\t\t" << "3:00\t\t" << "3:30" << endl;
+	
+
 }
 
+/*
 void hsFaculty::editSchedule(schedule)
 {
     //ask if user wants to add dates or remove dates & enters those functions
@@ -69,16 +76,17 @@ void hsFaculty::removeAvailableTimes(schedule)
     
 }
 */
+
 void hsFaculty::showStats(coronaInfo nationalStats, Statistics stats)
 {
     User::showStats(nationalStats); // displays base class function first
     cout << "Patients Registered:\t\t" << stats.getPatientCount() << endl;
-    cout << "  Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << endl;
+    cout << "Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << endl;
     cout << "# of Patients with Coronavirus:\t\t" << stats.getCoronaCount() << "  /  " << stats.getCoronaPercent() << endl;
     cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << endl;
 }
 
-void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys)
+void hsFaculty::updateRecord(schedule schedule, User faculty, Statistics& statSet, const systemControl& sys)
 {
     User patient;
 	bool another = false;
@@ -125,9 +133,9 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys
     
             // Printing Patient & Appointment details to Record
         o_stream << "==========================================================================\n\n";
-        o_stream << "Patient Name: " << patient.getName();
+        o_stream << "Patient Name: " << patient.getUserName();
         o_stream << "\t\t\t\tID: #" << patient.getID();
-        o_stream << "\n\nPractitioner Seen: " << faculty.getName();
+        o_stream << "\n\nPractitioner Seen: " << faculty.getUserName();
         o_stream << "\t\t\tApt: "; // << schedule.printAppt();
     
         cout << "\n----------------------------------\n\n";
@@ -142,7 +150,7 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys
             if (counselling)
             {
                 o_stream << "YES";
-                sys.statSet.incrementCounselingCount();
+                statSet.incrementCounselingCount();
             }
             else
             {
@@ -158,7 +166,7 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys
             if (flu)
             {
                 o_stream << "YES";
-                sys.statSet.incrementFluCount();
+                statSet.incrementFluCount();
             }
             else
             {
@@ -187,7 +195,7 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, systemControl &sys
             if (positive_corona)
             {
                 o_stream << "YES";
-                sys.statSet.incrementCoronaCount();
+                statSet.incrementCoronaCount();
             }
             else
             {

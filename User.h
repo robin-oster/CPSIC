@@ -9,7 +9,6 @@
 #ifndef USER_H
 #define USER_H
 
-//#include "schedule.h"
 #include "coronaInfo.h"
 #include <string>
 #include <iostream>
@@ -46,7 +45,7 @@ public:
 	bool operator==(User target);
 
 	int getID() const { return ID; }
-	string getName() const { return name; }
+	string getUserName() const { return name; }
 	string getPassword() const { return password; }
 	void setID(const int id) { ID = id; }
 	void setName(const string theName) { name = theName; }

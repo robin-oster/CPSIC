@@ -3,6 +3,11 @@
 	bill.h
 	Declaration file for class Bill
 */
+
+#ifndef BILL_H
+#define BILL_H
+
+
 #include <iostream>
 using namespace std;
 /**
@@ -10,7 +15,8 @@ using namespace std;
 	@author Matthew Oster moster@kent.edu
 */
 
-#include "schedule.h"
+//#include "schedule.h"
+class schedule;
 
 class Bill {
 public:
@@ -19,7 +25,7 @@ public:
 	Bill(): amount(0), issueDate(""), paidDate(""), paidTotal(0), unpaidTotal(0), paid(false) {}
 
 	void setBill(double amt, schedule issue); /*!<Set the amount, issueDate, and unpaid total.*/
-	void addToBill(double amt, schedule issue) { amount += amt; unpaidTotal += amt; issueDate = issue.getDate(); }
+	void addToBill(double amt, schedule issue);
 	void showBill();
 
 	/*
@@ -44,3 +50,5 @@ private:
 	bool paid; //Checks whether a bill has been paid (true) or unpaid (false)
 
 };
+
+#endif

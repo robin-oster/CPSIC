@@ -37,6 +37,8 @@ int main()
 	*/
 	
 	systemControl sys;
+	Statistics stats;
+	coronaInfo c_info;
 	User mainUser;
 	sys.logOn();
 

@@ -1,4 +1,6 @@
 #include "bill.h"
+#include "schedule.h"
+#include <date.h>
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -9,9 +11,24 @@ using namespace std;
 */
 
 void Bill::setBill(double amt, schedule issue) {
+	const char* format = new const char('%d');
+	ostringstream os;
 	amount = amt;
 	unpaidTotal = amt;
-	issueDate = issue.getDate();
+	date::to_stream(os, format, issue.getDate());
+	issueDate = os.str();
+}
+
+void Bill::addToBill(double amt, schedule issue) {
+	const char* format = new const char('%d');
+	ostringstream os;
+
+	amount += amt;
+
+	amount = amt;
+	unpaidTotal = amt;
+	date::to_stream(os, format, issue.getDate());
+	issueDate = os.str();
 }
 
 void Bill::showBill() {

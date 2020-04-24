@@ -11,6 +11,7 @@
 
 #include "User.h"
 #include "statistics.h"
+#include "systemControl.h"
 
 /**
     @author Daniel Stephan dstepha3@kent.edu
@@ -26,12 +27,14 @@ public:
 	hsFaculty operator=(const hsFaculty& source);
 	bool operator==(const hsFaculty& source);
 
+	const string getName() const { return getUserName(); }
+
     /**
      Displays the schedule.
      
      @param Schedule An instance of the current schedule
      */
-    //void viewSchedule(schedule);
+	void viewSchedule(schedule my_schedule);
     
     /**
      Allows user to add additional dates to semester schedule or
@@ -62,7 +65,7 @@ public:
      @param User User must be passed to find record.
      @param statistics
      */
-    void updateRecord(schedule, User faculty, systemControl &sys);
+    void updateRecord(schedule, User faculty, Statistics& statSet, const systemControl& sys);
     
     /**
      Displays patient record.

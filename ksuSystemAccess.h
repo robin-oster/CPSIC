@@ -16,23 +16,32 @@
 
 class ksuSystemAccess {
 public:
+	ksuSystemAccess(ofstream& out_stream): o_str(out_stream) {}
+
 	/**
 	Carries out the process of preparing, packaging, and sending an alert to the KSU website and Flash Alerts.
-	*/
-	void generateAlert();
 
-  	std::vector<ksuPatient> alertInfo; /*!< The collection of alert info to be published. */
+	@param amt The number of new cases of Coronavirus discovered.
+	*/
+	void generateAlert(int amt);
+
 
 private:
   /**
 	Helper function for generateAlert(). Responsible for publishing the details of the alert to the KSU website.
+
+	@param amt The number of new cases of Coronavirus discovered.
 	*/
-	void notifyKSU();
+	void notifyKSU(int amt);
  
   /**
 	Helper function for generateAlert(). Responsible for publishing the details of the alert to Flash Alerts.
+
+	@param amt The number of new cases of Coronavirus discovered.
 	*/
-	void notifyFlashAlerts();
+	void notifyFlashAlerts(int amt);
+	
+	ofstream& o_str;
   };
 	
   #endif

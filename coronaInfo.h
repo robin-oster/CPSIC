@@ -12,17 +12,21 @@
 */
 
 #include <vector>
+#include <random>
 
 class coronaInfo {
 public:
 	/**
 	Updates ohioCount based on national database data.
 	*/
-	void updateOhioCount();
+	int updateOhioCount();
 	/**
 	Updates usCount based on national database data
 	*/
-	void updateUSCount();
+	int updateUSCount();
+
+	void incrementOhioCount() { ohioCount++; }
+	void incrementUSCount() { usCount++; }
 
 	/**
 	Returns ohioCount.
@@ -35,6 +39,7 @@ public:
 private:
 	int ohioCount; /*!< Number of Coronavirus cases in Ohio. */
 	int usCount; /*!< Number of Coronavirus casesin the US. */
+	int infectionRate;
 
 };
 
