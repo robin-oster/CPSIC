@@ -13,8 +13,6 @@
 #include <string>
 #include <chrono>
 #include <ctime>
-#include <date.h>
-#include "hsFaculty.h"
 
 //set namespace to std
 using namespace std;
@@ -31,8 +29,8 @@ class hsFaculty;
 //appointments saved to schedule
 struct appointment {
 	//appointment data types
-	date::year_month_day date;
-	date::time_of_day<chrono::seconds> timeslot;
+	string date;
+	string timeslot;
 	ksuPatient* patient;
 	hsFaculty* faculty;
 };
@@ -52,13 +50,13 @@ class schedule {
 		void printAppt(appointment appt);
 		
 		//get and set functions
-		date::year_month_day getDate();
-		date::time_of_day<chrono::seconds> getTimeslot();
+		string getDate();
+		string getTimeslot();
 		ksuPatient getPatient();
 		hsFaculty getStaff();
 		
-		void setDate(date::year_month_day);
-		void setTimeslot(date::time_of_day<chrono::seconds> timeslot);
+		void setDate(string);
+		void setTimeslot(string timeslot);
 		void setPatient(ksuPatient patient);
 		void setStaff(hsFaculty faculty);
 		

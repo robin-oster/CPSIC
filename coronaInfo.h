@@ -16,6 +16,7 @@
 
 class coronaInfo {
 public:
+	coronaInfo() : ohioCount(0), usCount(0), infectionRate(0) {}
 	/**
 	Updates ohioCount based on national database data.
 	*/

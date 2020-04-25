@@ -16,6 +16,8 @@
 #include "bill.h"
 #include <string>
 #include <vector>
+#include <utility>
+
 
 /**
 
@@ -24,9 +26,8 @@
 
 class systemControl {
 public:
-
-	void logOn(); /*!< Facilitates the process of logging a user in.*/
-	void logOff(); /*!< Logs the current user out of the system.*/
+	std::pair<User*, bool> logOn(); /*!< Facilitates the process of logging a user in.*/
+	bool logOff(); /*!< Logs the current user out of the system.*/
 	void networkUpdate(); /*!< Ensures that information is up to date across the system.*/
 	void calculateEarnings(); /*!< Calculates total earnings in the practitioner department, counseling department, and both combined.*/
 	void addStatisticSnapshot(const Statistics stat) { statSet.push_back(stat); }
@@ -52,9 +53,9 @@ public:
 	bool verifyUser(User thisUser) const;
 	
 private:
-	double practitionerEarnings;
-	double counselorEarnings;
-	double totalEarnings;
+	double practitionerEarnings = 0;
+	double counselorEarnings = 0;
+	double totalEarnings = 0;
 };
 
 #endif

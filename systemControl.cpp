@@ -14,7 +14,7 @@
 */
 
 // Still have to implement database and find a way to distinguish ksuPatient from hsFaculty
-void systemControl::logOn() {
+pair<User*, bool> systemControl::logOn() {
 	int id;
 	std::string password;
 
@@ -25,22 +25,24 @@ void systemControl::logOn() {
 	std::cout << "Password: ";
 	std::cin >> password;
 
-	User thisUser;
+	static User thisUser;
 	thisUser.setID(id); thisUser.setPassword(password); // Set user info
 	if (verifyUser(thisUser)) {	// If user has been found in the database
 		if (thisUser.getID() != 00000001 && thisUser.getID() != 00000002 && thisUser.getID() != 00000003 &&
 			thisUser.getID() != 00000004 && thisUser.getID() != 00000005) { // hsFaculty ID values?
 			ksuPatient patientUser(thisUser, true);
+			
 			auto userIt = std::find(registeredPatients.begin(), registeredPatients.end(), patientUser);
 			if (userIt == registeredPatients.end()) { //patient not yet registered, register them
 				registeredPatients.push_back(patientUser);
+
 			}
-			return;
+			return std::make_pair(&thisUser, patientUser.getStudentStatus());
 			
 		}
 		else { // user is hsFaculty
 			facultyAccess = true;
-			return;
+			return std::make_pair(&thisUser, false);
 		};
 	}
 	else {
@@ -49,7 +51,12 @@ void systemControl::logOn() {
 	}
 }
 
-void systemControl::logOff(){
+bool systemControl::logOff(){
+	char choice;
+	cout << "Really log off? Y/N: ";
+	cin >> choice;
+	if (choice == 'y' || choice == 'Y') return true;
+	else return false;
 }
 
 void systemControl::networkUpdate() {

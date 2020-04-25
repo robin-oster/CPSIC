@@ -15,8 +15,8 @@ ksuPatient::ksuPatient(const ksuPatient& patient) {
 	setName(patient.getName());
 	setPassword(patient.getPassword());
 	student = patient.getStudentStatus();
-	practitionerBill = *(patient.getPractitionerBill());
-	counselorBill = *(patient.getCounselorBill());
+	practitionerBill = patient.practitionerBill; //*(patient.getPractitionerBill());
+	counselorBill = patient.counselorBill; //*(patient.getCounselorBill());
 }
 
 ksuPatient::ksuPatient(const User& user, bool isStudent) {

@@ -70,15 +70,11 @@ void hsFaculty::editSchedule(schedule my_schedule)
 void hsFaculty::addDates(schedule my_schedule)
 {
     // adds new dates to semester schedule
-    date::year_month_day ymd;
-    cout << "Enter year: ";
-    cin >> ymd.year;
-    cout << "Enter month: ";
-    cin >> ymd.month;
-    cout << "Enter day: ";
-    cin >> ymd.day;
+    string date;
+    cout << "Enter the date: ";
+    cin >> date;
 
-    my_schedule.setDate(ymd);
+    my_schedule.setDate(date);
 }
 
 void hsFaculty::removeDates(schedule my_schedule)
@@ -91,7 +87,7 @@ void hsFaculty::removeAvailableTimes(schedule my_schedule)
     
 }
 
-void hsFaculty::showStats(coronaInfo nationalStats, Statistics stats)
+void hsFaculty::showStats(coronaInfo& nationalStats, Statistics& stats) const
 {
     User::showStats(nationalStats); // displays base class function first
     cout << "Patients Registered:\t\t" << stats.getPatientCount() << endl;

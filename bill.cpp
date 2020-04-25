@@ -11,24 +11,15 @@ using namespace std;
 */
 
 void Bill::setBill(double amt, schedule issue) {
-	const char* format = new const char('%d');
-	ostringstream os;
 	amount = amt;
 	unpaidTotal = amt;
-	date::to_stream(os, format, issue.getDate());
-	issueDate = os.str();
+	issueDate = issue.getDate();
 }
 
 void Bill::addToBill(double amt, schedule issue) {
-	const char* format = new const char('%d');
-	ostringstream os;
-
 	amount += amt;
-
-	amount = amt;
-	unpaidTotal = amt;
-	date::to_stream(os, format, issue.getDate());
-	issueDate = os.str();
+	unpaidTotal = amount - paidTotal;
+	issueDate = issue.getDate();
 }
 
 void Bill::showBill() {

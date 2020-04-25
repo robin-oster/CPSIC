@@ -35,7 +35,7 @@ public:
      */
     
 
-	void showStats(coronaInfo stats)
+	void showStats(coronaInfo& stats) const
     {
 		cout << "Coronavirus cases in Ohio:\t" << /*cases <<*/ endl;
 		cout << "Coronavirus cases in USA:\t" << /*cases <<*/ endl;

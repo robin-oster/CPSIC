@@ -6,6 +6,7 @@
 //include necessary directories
 #include "schedule.h"
 #include "ksuPatient.h"
+#include "hsFaculty.h"
 
 //set namespace to std
 using namespace std;
@@ -32,10 +33,10 @@ void schedule::printAppt(appointment appt) {
 }
 
 //get and set functions
-date::year_month_day schedule::getDate() {
+string schedule::getDate() {
 	return appt.date;
 }
-date::time_of_day<chrono::seconds> schedule::getTimeslot() {
+string schedule::getTimeslot() {
 	return appt.timeslot;
 }
 ksuPatient schedule::getPatient() {
@@ -45,10 +46,10 @@ hsFaculty schedule::getStaff() {
 	return *(appt.faculty);
 }
 
-void schedule::setDate(date::year_month_day date) {
+void schedule::setDate(string date) {
 	appt.date = date;
 }
-void schedule::setTimeslot(date::time_of_day<chrono::seconds> timeslot) {
+void schedule::setTimeslot(string timeslot) {
 	appt.timeslot = timeslot;
 }
 void schedule::setPatient(ksuPatient patient) {

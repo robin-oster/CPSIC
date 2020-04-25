@@ -8,16 +8,16 @@
 
 #include "User.h"
 #include "systemControl.h"
-
-//#include “schedule.h”
-//#include “statistics.h”
-//#include “systemAccess.h”
-//#include “bill.h”
-//#include "coronaInfo.h"
+#include "schedule.h"
+#include "statistics.h"
+#include "ksuSystemAccess.h"
+#include "bill.h"
+#include "coronaInfo.h"
 
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <utility>
 using namespace std;
 
 /**
@@ -29,25 +29,167 @@ using namespace std;
 
 int main()
 {
+	ofstream os;
 
-	/**
-	 *
-	 * This main does nothing.
-	 *
-	*/
-	
 	systemControl sys;
 	Statistics stats;
 	coronaInfo c_info;
-	User mainUser;
-	sys.logOn();
+	ksuSystemAccess ksuAccess(os);
+	User* mainUser; bool studentStatus;
+	vector<schedule> facultySchedule(2); //facultySchedule doesn't track individual schedules yet, its still in testing
+	bool log_out = false;
+	int prevCoronaCount = 0;
 
+	do {
+		log_out = false;
+		pair<User*, bool> userInfo = sys.logOn();
+		mainUser = userInfo.first;
 
-	string words = "ope.";
+		stats.setPatientCount(sys.getPatientCount());
+		c_info.updateOhioCount();
+		c_info.updateUSCount();
+		if (c_info.getOhioCount() > prevCoronaCount) {
+			ksuAccess.generateAlert(c_info.getOhioCount() - prevCoronaCount);
+		}
+		prevCoronaCount = c_info.getOhioCount();
 
-	for (auto i = sys.registeredPatients.begin(); i != sys.registeredPatients.end(); i++)
-		cout << *i;
-	if (sys.facultyAccess == true) cout << "\nAccess Granted";
-	else cout << "\nAccess denied";
-	return 0;
+		if (sys.facultyAccess == false) {
+			ksuPatient patientUser(*mainUser, userInfo.second);
+			unsigned int choice;
+
+			do {
+				do {
+					cout << "Welcome to the KSU-HS CPSIC. What would you like to do?\n";
+					cout << "Enter 1 to make an appointment.\n";
+					cout << "Press 2 to view your appointments.\n";
+					cout << "Press 3 to reschedule an appointment.\n";
+					cout << "Enter 4 to view outstanding bills.\n";
+					cout << "Enter 5 to make a payment on a bill.\n";
+					cout << "Enter 6 to log out of the system.\n";
+					cout << "Input: ";
+					cin >> choice;
+
+					if (choice > 6) cout << "Invalid input. Try again.\n";
+				} while (choice > 6);
+
+				if (choice == 1) {
+					//register appointment
+					int facultyChoice;
+					cout << "See a practioner or counselor?\n";
+					cout << "Enter 1 for practitioner, or 2 for counselor: ";
+					//will need to have a choice between individual faculty members rather than just the two types
+					do {
+						cin >> facultyChoice;
+						if (facultyChoice != 1 && facultyChoice != 2) cout << "Invalid input. Try again.\n";
+					} while (facultyChoice != 1 && facultyChoice != 2);
+
+					if (facultyChoice == 1) patientUser.addToPractitionerBill(facultySchedule[0]);
+					else patientUser.addToCounselorBill(facultySchedule[1]);
+
+				}
+				else if (choice == 2) {
+					//view appointments
+				}
+				else if (choice == 3) {
+					//reschedule appointments
+				}
+				else if (choice == 4) {
+					patientUser.showCounselorBill();
+					patientUser.showPractitionerBill();
+				}
+				else if (choice == 5) {
+					int billChoice;
+					cout << "Make a payment on which bill?\n";
+					cout << "Enter 1 for practitioner bill, 2 for counseler bill: \n";
+					do {
+						cin >> billChoice;
+						if (billChoice != 1 && billChoice != 2) cout << "Invalid input. Try again.\n";
+					} while (billChoice != 1 && billChoice != 2);
+
+					double paymentAmount;
+					if (billChoice == 1) {
+						do {
+							cout << "Pay how much on practitioner bill?: ";
+							cin >> paymentAmount;
+							if (paymentAmount < 0.01) cout << "Invalid input.Try again.\n";
+						} while (paymentAmount < 0.01);
+						patientUser.getPractitionerBill()->payBill(paymentAmount);
+					}
+					else {
+						do {
+							cout << "Pay how much on counselor bill?: ";
+							cin >> paymentAmount;
+							if (paymentAmount < 0.01) cout << "Invalid input.Try again.\n";
+						} while (paymentAmount < 0.01);
+						patientUser.getCounselorBill()->payBill(paymentAmount);
+					}
+				}
+				else if (choice == 6) {
+					int logOutChoice;
+					do {
+						cout << "Log out? Enter 1 to confirm, 2 to cancel: ";
+						cin >> logOutChoice;
+						if (logOutChoice != 1 && logOutChoice != 2) cout << "Invalid input.Try again.\n";
+					} while (logOutChoice != 1 && logOutChoice != 2);
+
+					if (logOutChoice == 1) log_out = true;
+					else logOutChoice = false;
+				}
+			} while (log_out == false);
+		}
+		else {
+			hsFaculty facultyUser(*mainUser);
+			unsigned int choice;
+
+			do {
+				
+				do {
+					cout << "Welcome to the KSU-HS CPSIC. What would you like to do?\n";
+					cout << "Enter 1 to view your schedule.\n"; // needs implemented
+					cout << "Press 2 to edit your schedule.\n"; // needs implemented
+					cout << "Press 3 to remove available times.\n"; // needs implemented
+					cout << "Enter 4 to view statistical information.\n";
+					cout << "Enter 5 to update a patient record.\n";
+					cout << "Enter 6 to view a patient record.\n";
+					cout << "Enter 7 to log out of the system.\n";
+					cout << "Input: ";
+					cin >> choice;
+
+					if (choice > 7) cout << "Invalid input. Try again.\n";
+				} while (choice > 7);
+
+				if (choice == 1) {
+					// view schedule
+				}
+				else if (choice == 2) {
+					// edit schedule
+				}
+				else if (choice == 3) {
+					// remove times
+				}
+				else if (choice == 4) {
+					facultyUser.showStats(c_info, stats);
+				}
+				else if (choice == 5) {
+					//facultyUser.updateRecord();
+					//update stats accordingly
+				}
+				else if (choice == 6) {
+					//facultyUser.viewSchedule();
+				}
+				else if (choice == 7) {
+					int logOutChoice;
+					do {
+						cout << "Log out? Enter 1 to confirm, 2 to cancel: ";
+						cin >> logOutChoice;
+						if (logOutChoice != 1 && logOutChoice != 2) cout << "Invalid input.Try again.\n";
+					} while (logOutChoice != 1 && logOutChoice != 2);
+
+					if (logOutChoice == 1) log_out = true;
+					else logOutChoice = false;
+				}
+			} while (log_out == false);
+
+		}
+	} while (true);
 }

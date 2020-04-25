@@ -42,8 +42,8 @@ public:
 	void showCounselorBill() { std::cout << "COUNSELOR BILL\n"; counselorBill.showBill(); }
 
     bool getStudentStatus() const { return student; }
-	const Bill* getPractitionerBill() const { return &practitionerBill; }
-	const Bill* getCounselorBill() const { return &counselorBill; }
+	Bill* getPractitionerBill() { return &practitionerBill; }
+	Bill* getCounselorBill() { return &counselorBill; }
 	const string getName() const { return getUserName(); }
 
     /**

@@ -11,7 +11,8 @@
 
 #include "User.h"
 #include "statistics.h"
-#include "systemControl.h"
+
+class systemControl;
 
 /**
     @author Daniel Stephan dstepha3@kent.edu
@@ -57,7 +58,7 @@ public:
      
      @param nationalStats stats
      */
-    void showStats(coronaInfo nationalStats, Statistics stats);
+    void showStats(coronaInfo& nationalStats, Statistics& stats) const;
     
      /**
      Allows user to update patient record
