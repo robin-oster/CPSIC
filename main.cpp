@@ -53,6 +53,9 @@ int main()
 		}
 		prevCoronaCount = c_info.getOhioCount();
 
+		sys.addStatisticSnapshot(stats);
+		sys.addCoronaSnapshot(c_info);
+
 		if (sys.facultyAccess == false) {
 			ksuPatient patientUser(*mainUser, userInfo.second);
 			unsigned int choice;
