@@ -21,7 +21,7 @@
 using namespace std;
 
 /**
-	@author 	Jake Davis		jdavi205@kent.edu	
+	@author 	Jake Davis	jdavi205@kent.edu	
 	@author 	Jacob Gojkov	jgojkov@kent.edu
 	@author	Matthew Oster	moster@kent.edu
 	@author	Daniel Stephan	dstepha3@kent.edu
@@ -178,7 +178,7 @@ int main()
 					//update stats accordingly
 				}
 				else if (choice == 6) {
-					//facultyUser.viewSchedule();
+					facultyUser.viewRecord(sys);
 				}
 				else if (choice == 7) {
 					int logOutChoice;
