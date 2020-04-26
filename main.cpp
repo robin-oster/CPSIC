@@ -42,6 +42,7 @@ int main()
 
 	do {
 		log_out = false;
+		sys.facultyAccess = false;
 		pair<User*, bool> userInfo = sys.logOn();
 		mainUser = userInfo.first;
 
@@ -172,6 +173,7 @@ int main()
 				}
 				else if (choice == 4) {
 					facultyUser.showStats(c_info, stats);
+					sys.visualizeStats();
 				}
 				else if (choice == 5) {
 					//facultyUser.updateRecord();

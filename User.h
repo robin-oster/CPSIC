@@ -37,8 +37,8 @@ public:
 
 	void showStats(coronaInfo& stats) const
     {
-		cout << "Coronavirus cases in Ohio:\t" << /*cases <<*/ endl;
-		cout << "Coronavirus cases in USA:\t" << /*cases <<*/ endl;
+		cout << "Coronavirus cases in Ohio:\t" << stats.getOhioCount() << endl;
+		cout << "Coronavirus cases in USA:\t" << stats.getUSCount() << endl;
 	}
 
 

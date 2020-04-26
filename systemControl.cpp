@@ -64,52 +64,193 @@ void systemControl::networkUpdate() {
 }
 
 void systemControl::visualizeStats() {
-	cout << "CORONAVIRUS CASES IN THE US\n";
-	for (auto i = nationalInfo.begin(); i != nationalInfo.end(); i++) {
-		for (auto j = 0; j <= i->getUSCount() / 50; j++) {
-			cout << "x\n";
+	char squareGraph[11][11];
+	
+	for (int i = 0; i < 11; i++) squareGraph[i][0] = '|';
+	for (int i = 0; i < 11; i++) squareGraph[10][i] = '-';
+	for (int i = 0; i < 10; i++)
+		for (int j = 1; j < 11; j++) squareGraph[i][j] = '.';
+	
+	cout << "TEST\n";
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 11; j++) {
+			cout << squareGraph[i][j];
 		}
-		cout << " ";
+		cout << endl;
+	}
+
+
+	auto statStart = statSet.begin();
+	auto coronaStart = nationalInfo.begin();
+	// shows last 10 snapshots
+	if (statSet.size() > 10) statStart = statSet.end() - 11;
+	if (nationalInfo.size() > 10)  coronaStart = nationalInfo.end() - 11;
+
+
+	cout << "\n\n";
+	cout << "CORONAVIRUS CASES IN THE US\n";
+	for (coronaStart; coronaStart != nationalInfo.end(); coronaStart++) {
+		int i = 1;
+		int j = 1;
+		int graphStat = coronaStart->getUSCount() ;
+		while (graphStat > 0 && j < 11) {
+			graphStat /= 50;
+			squareGraph[j][i] = 'x';
+			j++;
+		}
+		i++;
+	}
+
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 11; j++) {
+			cout << squareGraph[i][j];
+		}
+		cout << endl;
 	}
 	
+	for (int i = 0; i < 10; i++)
+		for (int j = 1; j < 11; j++) squareGraph[i][j] = '.';
+
 	cout << "\n\n";
 	cout << "CORONAVIRUS CASES IN OHIO\n";
-	for (auto i = nationalInfo.begin(); i != nationalInfo.end(); i++) {
-		for (auto j = 0; j <= i->getOhioCount(); j++) {
-			cout << "x\n";
+	for (coronaStart; coronaStart != nationalInfo.end(); coronaStart++) {
+		int i = 1;
+		int j = 10;
+		int graphStat = coronaStart->getOhioCount();
+		while (graphStat > 0 && j > 0) {
+			graphStat -= 10;
+			squareGraph[j][i] = 'x';
+			j--;
 		}
-		cout << " ";
+		i++;
 	}
+
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 11; j++) {
+			cout << squareGraph[i][j];
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < 10; i++)
+		for (int j = 1; j < 11; j++) squareGraph[i][j] = '.';
 
 	cout << "\n\n";
 	cout << "CORONAVIRUS CASES AT KSU\n";
-	for (auto i = statSet.begin(); i != statSet.end(); i++) {
-		for (auto j = 0; j <= i->getCoronaCount(); j++) {
-			cout << "x\n";
+	for (statStart; statStart != statSet.end(); statStart++) {
+		int i = 1;
+		int j = 1;
+		int graphStat = statStart->getCoronaCount();
+		while (graphStat > 0 && j < 11) {
+			graphStat -= 5;
+			squareGraph[j][i] = 'x';
+			j++;
 		}
-		cout << " ";
+		i++;
 	}
+
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 11; j++) {
+			cout << squareGraph[i][j];
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < 10; i++)
+		for (int j = 1; j < 11; j++) squareGraph[i][j] = '.';
 
 	cout << "\n\n";
 	cout << "TOTAL NUMBER OF KSU-HS CLIENTS\n";
-	for (auto i = statSet.begin(); i != statSet.end(); i++) {
-		for (auto j = 0; j <= i->getPatientCount(); j++) {
-			cout << "x\n";
+	for (statStart; statStart != statSet.end(); statStart++) {
+		int i = 1;
+		int j = 1;
+		int graphStat = statStart->getPatientCount();
+		while (graphStat > 0 && j < 11) {
+			graphStat -= 5;
+			squareGraph[j][i] = 'x';
+			j++;
 		}
-		cout << " ";
+		i++;
 	}
 
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 11; j++) {
+			cout << squareGraph[i][j];
+		}
+		cout << endl;
+	}
+
+	char percentGraph[11][50];
+	for (int i = 0; i < 11; i++) percentGraph[i][0] = '|';
+	for (int i = 1; i < 11; i++)
+		for (int j = 1; j < 50; j++) percentGraph[i][j] = '.';
+
+	/*
 	cout << "\n\n";
 	cout << "PERCENTAGE OF KSU-HS CLIENTS EXHIBITING FLU-LIKE CONDITIONS\n";
+	for (statStart; statStart != statSet.end(); statStart++) {
+		statStart->calculatePercentages();
+		int i = 1;
+		int j = 1;
+		if(statStart->getFluPercent() != 0) int j = statStart->getFluPercent() / 2;
+		for(int k = 1; k < j; k++){
+			percentGraph[i][k] = 'x';
+		}
+		i++;
+	}
+
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 50; j++) {
+			cout << percentGraph[i][j];
+		}
+		cout << endl;
+	}
+
+	for (int i = 1; i < 11; i++)
+		for (int j = 1; j < 50; j++) squareGraph[i][j] = '.';
 
 	cout << "\n\n";
 	cout << "PERCENTAGE OF KSU-HS CLIENTS WITH CORONAVIRUS\n";
+	for (statStart; statStart != statSet.end(); statStart++) {
+		statStart->calculatePercentages();
+		int i = 1;
+		int j = 1;
+		if (statStart->getCoronaPercent() != 0) int j = statStart->getCoronaPercent() / 2;
+		for (int k = 1; k < j; k++) {
+			percentGraph[i][k] = 'x';
+		}
+		i++;
+	}
+
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 50; j++) {
+			cout << percentGraph[i][j];
+		}
+		cout << endl;
+	}
+
+	for (int i = 1; i < 11; i++)
+		for (int j = 1; j < 50; j++) squareGraph[i][j] = '.';
 
 	cout << "\n\n";
 	cout << "PERCENTAGE OF KSU-HS CLIENTS WHO'VE BEEN TO COUNSELING\n";
+	for (statStart; statStart != statSet.end(); statStart++) {
+		statStart->calculatePercentages();
+		int i = 1;
+		int j = 1;
+		if (statStart->getCounselingPercent() != 0) int j = statStart->getCounselingPercent() / 2;
+		for (int k = 1; k < j; k++) {
+			percentGraph[i][k] = 'x';
+		}
+		i++;
+	}
 
-
-
+	for (int i = 0; i < 11; i++) {
+		for (int j = 0; j < 50; j++) {
+			cout << percentGraph[i][j];
+		}
+		cout << endl;*/
+	
 }
 
 void systemControl::calculateEarnings() {
