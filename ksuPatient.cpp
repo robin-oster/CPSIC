@@ -5,6 +5,9 @@
 */
 
 #include "ksuPatient.h"
+#include "schedule.h"
+#include <fstream>
+#include <sstream>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -70,17 +73,187 @@ void ksuPatient::addToCounselorBill(const schedule &sched) {
 	}
 }
 
+void ksuPatient::registerAppointment(schedule& schedule)
+{
+    //register appointment
+    ifstream i_stream;
+    stringstream s_stream;
+    string month;
+    string file_char;
+    bool date_check = false;
+    int day, year;
+    
+    int student_id = getID();
+    string date, time;
+    int doctor;
+    
+    int facultyChoice;
+    
+    do {
+    
+        cout << "Enter the date you would like to schedule an appointment 'Apr xx 20xx': ";
+        cin >> month >> day >> year;
+       
+        if (month == "Jan" || month == "Feb" || month == "Mar" || month == "Apr" || month == "May" || month == "Jun" || month == "Jul" || month == "Aug" || month == "Sept" || month == "Oct" || month == "Nov" || month == "Dec" )
+        {
+            if (day > 0 && day <= 31)
+            {
+                if (year > 2010 && year < 3000)
+                {
+                    date_check = true;
+                } else { cout << "\nYEAR ERROR.\n"; }
+            } else { cout << "\nDAY ERROR.\n"; }
+        } else { cout << "\nMONTH ERROR.\n"; }
+        
+    } while (!date_check);
+    
+    s_stream << month << " " << day << " " << year;
+    date = s_stream.str();
+    
+    cout << "Would You like to see a practioner or counselor?\n";
+    cout << "Enter 1 for Practitioner, or 2 for Counselor: ";
+    
+    //will need to have a choice between individual faculty members rather than just the two types
+    do
+    {
+        cin >> facultyChoice;
+        if (facultyChoice != 1 && facultyChoice != 2)
+        {
+            cout << "Invalid input. Try again.\n";
+        }
+    } while (facultyChoice != 1 && facultyChoice != 2);
+
+    if (facultyChoice == 1)
+        {
+            i_stream.open(date);
+            
+            if (!i_stream.is_open())
+            {
+                cout << "Error: No available appointment times on " << date;
+            }
+            else
+            {
+                char temp[25];
+                
+                cout << endl << "Displaying available appointment times for: " << date << endl;;
+                
+                while (getline(i_stream, file_char))
+                {
+                    if (file_char == "* 1 ")
+                        cout << "\tDoc/Nurse 1:\t\t";
+                    else if (file_char == "* 2 ")
+                        cout << "\tDoc/Nurse 2:\t\t";
+                    else if (file_char == "* 3 ")
+                        cout << "\tDoc/Nurse 3:\t\t";
+                    else if (file_char == "\n")
+                        cout << endl << endl;
+                    
+                    else if (file_char == "* 4 ")
+                        break;
+                    
+                    strcpy(temp, file_char.c_str());
+                    
+                    if (temp[0] == '-')
+                    {
+                        cout << "\t\t\t";
+                    }
+                    else if (temp[0] == '+')
+                    {
+                        cout << file_char.substr(2);
+                        cout << "\t\t";
+                    }
+                    else if (temp[0] == '#')    { cout << endl; }
+                }
+   
+                i_stream.close();
+                
+                cout << "\nWhich doctor would you like to see: ";
+                cin >> doctor;
+                cout << "\nEnter the time you would like to schedule your appointment in the format 'HH:MM': ";
+                cin >> time;
+            }
+            
+            schedule.saveAppt(student_id, date, time, doctor);
+            
+            addToPractitionerBill(schedule);
+        }
+    else if (facultyChoice == 2)
+        {
+            i_stream.open(date);
+            bool found = false;
+                     
+            if (!i_stream.is_open())
+            {
+                cout << "Error: No available appointment times on " << date;
+            }
+            else
+            {
+                char temp[25];
+                         
+                cout << endl << "Displaying available appointment times for: " << date << endl;;
+                         
+                while (getline(i_stream, file_char))
+                {
+                    if (file_char == "* 4 ")
+                    {
+                        cout << "\tCounselor 1:\t\t";
+                        found = true;
+                    }
+                    else if (file_char == "* 5 ")
+                    {
+                        cout << "\tCounselor 2:\t\t";
+                        found = true;
+                    }
+                    else if (file_char == "\n")
+                        cout << endl << endl;
+                             
+                    strcpy(temp, file_char.c_str());
+                    
+                    if (found)
+                    {
+                        if (temp[0] == '-')
+                        {
+                            cout << "\t\t\t";
+                        }
+                        else if (temp[0] == '+')
+                        {
+                            cout << file_char.substr(2);
+                            cout << "\t\t";
+                        }
+                        else if (temp[0] == '#')    { cout << endl; }
+                    }
+                    
+                }
+            
+                    i_stream.close();
+                         
+                    cout << "\nWhich doctor would you like to see: ";
+                    cin >> doctor;
+                    cout << "\nEnter the time you would like to schedule your appointment in the format 'HH:MM': ";
+                    cin >> time;
+            }
+            
+            if (doctor == 1)
+            {
+                doctor = 4;
+            }
+            else if (doctor == 2)
+            {
+                doctor = 5;
+            }
+            
+            schedule.saveAppt(student_id, date, time, doctor);
+            addToCounselorBill(schedule);
+        }
+}
+
+
+void ksuPatient::viewAppointment(schedule schedule)
+{
+    schedule.printAppt();
+}
+
 /*
-void ksuPatient::viewAppointment(schedule)
-{
-    
-}
-
-void ksuPatient::registerAppointment(schedule)
-{
-    
-}
-
 void ksuPatient::rescheduleAppointment(schedule)
 {
     
