@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 
@@ -18,8 +19,8 @@ ksuPatient::ksuPatient(const ksuPatient& patient) {
 	setName(patient.getName());
 	setPassword(patient.getPassword());
 	student = patient.getStudentStatus();
-	practitionerBill = patient.practitionerBill; //*(patient.getPractitionerBill());
-	counselorBill = patient.counselorBill; //*(patient.getCounselorBill());
+	practitionerBill = patient.practitionerBill;
+	counselorBill = patient.counselorBill;
 }
 
 ksuPatient::ksuPatient(const User& user, bool isStudent) {
@@ -52,14 +53,30 @@ ostream& operator<<(ostream& os, const ksuPatient& patient) {
 }
 
 void ksuPatient::addToPractitionerBill(const schedule &sched) {
-	if (practitionerBill.getAmount() == 0) {
-		if (student == true) practitionerBill.setBill(10, sched);
-		else practitionerBill.setBill(30, sched);
+    double chargeAmt = 0;
+    if (practitionerBill.getAmount() == 0) {
+
+        if (student == true) {
+            chargeAmt = 10;
+            practitionerBill.setBill(chargeAmt, sched);
+        }
+        else {
+            chargeAmt = 30;
+            practitionerBill.setBill(chargeAmt, sched);
+        }
 	}
 	else {
-		if (student == true) practitionerBill.addToBill(10, sched);
-		else practitionerBill.addToBill(30, sched);
+        if (student == true) {
+            chargeAmt = 10;
+            practitionerBill.addToBill(10, sched);
+        }
+        else {
+            chargeAmt = 30;
+            practitionerBill.addToBill(30, sched);
+        }
 	}
+    cout << fixed << setprecision(2) << setfill('0');
+    cout << "$" << chargeAmt << " charged to your account.\n\n";
 }
 
 void ksuPatient::addToCounselorBill(const schedule &sched) {

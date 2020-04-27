@@ -23,9 +23,14 @@ public:
 
 	/** Constructor */
 	Bill(): amount(0), issueDate(""), paidDate(""), paidTotal(0), unpaidTotal(0), paid(false) {}
+	Bill(const Bill& src): amount(src.amount), issueDate(src.issueDate), paidDate(src.paidDate), paidTotal(src.paidTotal), 
+		unpaidTotal(src.unpaidTotal), paid(src.paid){}
 
 	void setBill(double amt, schedule issue); /*!<Set the amount, issueDate, and unpaid total.*/
+	void setAmount(double amt) { amount = amt; }
+	void setPaidTotal(double amt) { paidTotal = amt; if (paidTotal == amt) paid = true; }
 	void addToBill(double amt, schedule issue);
+	
 	void showBill();
 
 	/*
@@ -34,12 +39,12 @@ public:
 	void payBill(double amt);
 
 	// Accessor methods
-	double getAmount() { return amount; }
-	string getDate() { return issueDate; }
-	string getPaidDate() { return paidDate; }
+	double getAmount() const { return amount; }
+	string getDate() const { return issueDate; }
+	string getPaidDate() const { return paidDate; }
 	double getPaidTotal() const { return paidTotal; }
-	double getUnpaidTotal() { return unpaidTotal; }
-	bool getPaymentStatus() { return paid; }
+	double getUnpaidTotal() const { return unpaidTotal; }
+	bool getPaymentStatus() const { return paid; }
 
 private:
 	double amount; //Total amount of the individual bill, depending on ksuPatient

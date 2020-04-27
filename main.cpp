@@ -93,6 +93,8 @@ int main()
 				}
 				else if (choice == 5) {
 					int billChoice;
+					auto userIt = find(sys.registeredPatients.begin(), sys.registeredPatients.end(), patientUser);
+
 					cout << "Make a payment on which bill?\n";
 					cout << "Enter 1 for practitioner bill, 2 for counseler bill: \n";
 					do {
@@ -108,6 +110,9 @@ int main()
 							if (paymentAmount < 0.01) cout << "Invalid input.Try again.\n";
 						} while (paymentAmount < 0.01);
 						patientUser.getPractitionerBill()->payBill(paymentAmount);
+
+						userIt->getPractitionerBill()->setPaidTotal(userIt->getPractitionerBill()->getPaidTotal() + paymentAmount);
+
 					}
 					else {
 						do {
@@ -116,6 +121,7 @@ int main()
 							if (paymentAmount < 0.01) cout << "Invalid input.Try again.\n";
 						} while (paymentAmount < 0.01);
 						patientUser.getCounselorBill()->payBill(paymentAmount);
+						userIt->getCounselorBill()->setPaidTotal(userIt->getCounselorBill()->getPaidTotal() + paymentAmount);
 					}
 				}
 				else if (choice == 6) 
@@ -136,12 +142,13 @@ int main()
 					cout << "Enter 3 to view statistical information.\n";
 					cout << "Enter 4 to update a patient record.\n";
 					cout << "Enter 5 to view a patient record.\n";
-					cout << "Enter 6 to log out of the system.\n";
+					cout << "Enter 6 to view department and total earnings.\n";
+					cout << "Enter 7 to log out of the system.\n";
 					cout << "Input: ";
 					cin >> choice;
 
-					if (choice > 6) cout << "Invalid input. Try again.\n";
-				} while (choice > 6);
+					if (choice > 7) cout << "Invalid input. Try again.\n";
+				} while (choice > 7);
 
 				if (choice == 1) {
 					facultyUser.viewSchedule(schedule);
@@ -171,7 +178,16 @@ int main()
 				else if (choice == 5) {
 					facultyUser.viewRecord(sys);
 				}
-				else if (choice == 6)
+				else if (choice == 6) {
+					sys.calculateEarnings();
+					cout << "\n==============================================================================";
+					cout << fixed << setprecision(2) << setfill('0');
+					cout << "\nTotal Practitioner Earnings: " << "$" << sys.getPractitionerEarnings();
+					cout << "\nTotal Counselor Earnings: " << "$" << sys.getCounselorEarnings();
+					cout << "\nTotal KSU-HS Earnings: " << "$" << sys.getTotalEarnings();
+					cout << "\n=============================================================================\n\n";
+				}
+				else if (choice == 7)
 					log_out = sys.logOff();
 			} while (log_out == false);
 		}

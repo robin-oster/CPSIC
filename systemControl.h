@@ -36,7 +36,7 @@ public:
 
 	/*!< Accessor Methods*/
 	double getPractitionerEarnings() { return practitionerEarnings; }
-	double getCounselorEarningss() { return counselorEarnings; }
+	double getCounselorEarnings() { return counselorEarnings; }
 	double getTotalEarnings() { return totalEarnings; }
 	int getPatientCount() { return registeredPatients.size(); }
 

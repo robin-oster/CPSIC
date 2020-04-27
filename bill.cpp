@@ -32,17 +32,19 @@ void Bill::showBill() {
 	if (paidTotal >= amount)
 		cout << "Paid Date: " << paidDate << endl;
 
-	cout << "=========================================================\n";
+	cout << "=========================================================\n\n";
 
 }
 
 void Bill::payBill(double amt) {
 	if (paid == false) {
 		paidTotal += amt;
+		if (paidTotal > amount) paidTotal = amount;
 		unpaidTotal -= amt;
+		if (unpaidTotal < 0) unpaidTotal = 0;
 		if (paidTotal >= amount) {
 			paid = true;
-			paidDate = "today";
+			paidDate = "";
 		}
 	}
 	else cout << "Your bill is aleady paid in full.\n";
