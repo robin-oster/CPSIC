@@ -46,46 +46,82 @@ bool hsFaculty::operator==(const hsFaculty& source) {
 
 void hsFaculty::viewSchedule(schedule my_schedule)
 {
-    my_schedule.printSchedule();
+    int user_id = getID();
+    my_schedule.printSchedule(user_id);
 }
 
 
-void hsFaculty::editSchedule(schedule my_schedule)
+void hsFaculty::editSchedule(schedule schedule)
 {
     int choice;
     //ask if user wants to add dates or remove dates & enters those functions
-    cout << "Enter 1 if you wish to add a date, or 2 if you wish to remove one: ";
-    cin >> choice;
-    while (choice != 1 && choice != 2) {
-        cout << "Invalid input.\n";
-        cout << "Enter 1 if you wish to add a date, or 2 if you wish to remove one: ";
+    cout << "Enter 1 if you wish to add a date, or 2 if you wish to remove one: \n Input: ";
+    do {
         cin >> choice;
-    }
     
-    if (choice == 1) addDates(my_schedule);
-    else removeDates(my_schedule);
+        if (choice != 1 && choice != 2)
+        { cout << "Invalid input.\n Input: "; }
+    
+    } while (choice != 1 && choice != 2);
+
+    if (choice == 1)
+    {
+        addDates(schedule);
+    }
+    else if (choice == 2)
+    {
+        //removeDates(schedule);
+    }
 }
 
 
-void hsFaculty::addDates(schedule my_schedule)
+void hsFaculty::addDates(schedule& schedule)
 {
     // adds new dates to semester schedule
+    stringstream s_stream;
+    bool add_times;
+    bool date_check = false;
     string date;
-    cout << "Enter the date: ";
-    cin >> date;
-
-    my_schedule.setDate(date);
+    string month;
+    int day,year;
+    int id = getID();
+    string name = getName();
+    
+    do {
+        
+        cout << "Enter the date you would like to add in the format 'Apr xx 20xx': ";
+        cin >> month >> day >> year;
+       
+        if (month == "Jan" || month == "Feb" || month == "Mar" || month == "Apr" || month == "May" || month == "Jun" || month == "Jul" || month == "Aug" || month == "Sept" || month == "Oct" || month == "Nov" || month == "Dec" )
+        {
+            if (day > 0 && day <= 31)
+            {
+                if (year > 2010 && year < 3000)
+                {
+                    date_check = true;
+                } else { cout << "\nYEAR ERROR.\n"; }
+            } else { cout << "\nDAY ERROR.\n"; }
+        } else { cout << "\nMONTH ERROR.\n"; }
+        
+    } while (!date_check);
+    
+    s_stream << month << " " << day << " " << year;
+    date = s_stream.str();
+    
+    cout << "Would you like to add your available times? Enter: 1 for Yes, 0 for No.\n\t- ";
+    cin >> add_times;
+    
+    if (add_times)
+    {
+        schedule.addTimes(date, id, name);
+    }
 }
 
-void hsFaculty::removeDates(schedule my_schedule)
+void hsFaculty::removeDates(schedule& schedule)
 {
     //removes dates from semester schedule
 }
 
-void hsFaculty::removeAvailableTimes(schedule my_schedule)
-{
-    
-}
 
 void hsFaculty::showStats(coronaInfo& nationalStats, Statistics& stats) const
 {
@@ -96,7 +132,7 @@ void hsFaculty::showStats(coronaInfo& nationalStats, Statistics& stats) const
     cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << endl;
 }
 
-void hsFaculty::updateRecord(schedule schedule, User faculty, Statistics& statSet, const systemControl& sys)
+void hsFaculty::updateRecord(Statistics& statSet, const systemControl& sys)
 {
     User patient;
 	bool another = false;
@@ -111,10 +147,12 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, Statistics& statSe
 		stringstream s_stream;
 		bool checked = false;
 		bool counselling, flu, tested_corona, positive_corona;
+        string month;
+        int day, year, hour, minute;
+        
 
         do
         {
-
             cout << "\nEnter Patient ID: #";
             cin >> id;
         
@@ -145,8 +183,17 @@ void hsFaculty::updateRecord(schedule schedule, User faculty, Statistics& statSe
         o_stream << "==========================================================================\n\n";
         o_stream << "Patient Name: " << patient.getUserName();
         o_stream << "\t\t\t\tID: #" << patient.getID();
-        o_stream << "\n\nPractitioner Seen: " << faculty.getUserName();
-        o_stream << "\t\t\tApt: "; // << schedule.printAppt();
+        o_stream << "\n\nPractitioner Seen: " << getUserName();
+        o_stream << "\t\t\tApt: "; 
+        
+        cout << "\nEnter the Appointment Date: Mon xx 20xx\nInput: ";
+        cin >> month >> day >> year;
+        cout << "\nEnter the Appointment Time: HH MM \nInput: ";
+        cin >> hour >> minute;
+    
+        o_stream << month << " " << day << " " << year << " @ " << hour << ":" << minute;
+        
+        cout << endl;
     
         cout << "\n----------------------------------\n\n";
         cout << "\tEnter: 1 for Yes, 0 for No.\n\n";
@@ -240,7 +287,6 @@ void hsFaculty::viewRecord(const systemControl &sys)
 {
     User patient;
     bool another = false;
-    bool answer = false;
 
     cout << endl;
 
@@ -280,10 +326,7 @@ void hsFaculty::viewRecord(const systemControl &sys)
                 }
             }
             
-            cout << "\nWould you like to exit? ( 1 = YES  |  0 = NO )  ";
-            cin >> answer;
-                
-            if (answer) { return; }
+
                 
         } while (!checked);
     
@@ -296,5 +339,7 @@ void hsFaculty::viewRecord(const systemControl &sys)
 		cout << endl;
         
     } while (another);
+    
+    return;
 }
 
