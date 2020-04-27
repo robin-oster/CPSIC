@@ -7,6 +7,8 @@
 #include <sstream>
 #include <string>
 #include <cstring>
+
+#include <cstdio>
 #include <vector>
 #include <iomanip>
 #include "schedule.h"
@@ -22,58 +24,144 @@ schedule::schedule() {
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
-    
-    appointment appt;
-}
 
 schedule::schedule(const schedule& src) {
     string current_date;
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
-    
-    appointment appt;
-}
 
 //printAppt function
 //Displays appointment
-void schedule::printAppt(appointment appt) {
-	cout << appt.patient->getName() << " " << appt.faculty->getName() << " " << appt.date << " " << appt.timeslot << '\n';
+void schedule::printAppt() {
+    cout << "\nYour current appointment is on ";
+    cout << appointment.date << " at " << appointment.timeslot << "." << endl;
 }
 
 //get and set functions
 string schedule::getDate() {
-	return appt.date;
+	return appointment.date;
 }
 string schedule::getTimeslot() {
-	return appt.timeslot;
+	return appointment.timeslot;
 }
-ksuPatient schedule::getPatient() {
-	return appt.patient;
+int schedule::getPatient() {
+	return appointment.patient;
 }
-hsFaculty schedule::getStaff() {
-	return *(appt.faculty);
+int schedule::getStaff() {
+	return (appointment.faculty);
 }
 
 void schedule::setDate(string date) {
-	appt.date = date;
+	appointment.date = date;
 }
 void schedule::setTimeslot(string timeslot) {
-	appt.timeslot = timeslot;
+	appointment.timeslot = timeslot;
 }
-void schedule::setPatient(ksuPatient patient) {
-	appt.patient = &patient;
+void schedule::setPatient(int patient_id) {
+	appointment.patient = patient_id;
 }
-void schedule::setStaff(hsFaculty faculty) {
-	appt.faculty = &faculty;
+void schedule::setStaff(int faculty_id) {
+	appointment.faculty = faculty_id;
 }
 
 //saveAppt function
 //saves appointment to schedule
-void schedule::saveAppt(appointment appt) {
-	if (oSchedule.is_open()) {
-		//oSchedule << appt.patient->getName() + ";" + appt.faculty->getName() + ";" << appt.date << ";" << appt.timeslot << "\n";
-	}
+void schedule::saveAppt(int student_id, string date, string time, int ID)
+{
+    stringstream s_stream1, s_stream2;
+    bool found = false;
+    s_stream1 << "* " << ID << " ";
+    string target_id;
+    string target_time;
+    target_id = s_stream1.str();
+    
+    s_stream2 << "+ " << time;
+    target_time = s_stream2.str();
+    
+    string file_char;
+    string buffer;
+    string temp_file = "temp";
+    ifstream read;
+    ofstream write;
+    read.open(date);
+    write.open(temp_file);
+    
+    
+    
+    if (!read.is_open())
+    {
+        cout << "Error opening file.\n;";
+        return;
+    }
+    
+    char temp[25];
+    
+    cout << endl << endl;
+    
+    while (getline(read, file_char))
+    {
+        if (file_char == target_id)
+        {
+            found = true;
+            write << file_char << "\n";
+        }
+        
+        else if (!found && file_char != target_id)
+        {
+            write << file_char << "\n";
+        }
+        
+        if (file_char == "\n")
+        {
+            write << file_char << "\n";
+            cout << endl << endl;
+        }
+        
+        if (found)
+        {
+            strcpy(temp, file_char.c_str());
+            
+            if (file_char != target_time && file_char != target_id)
+            {
+                write << file_char << "\n";
+            }
+            else if (file_char == target_time)
+            {
+                write << "- " << time << " : " << student_id << "\n";
+                found = false;
+            }
+            
+
+        }
+    }
+    
+    read.close();
+    write.close();
+    
+    read.open(temp_file);
+    write.open(date);
+    
+    buffer = "\0";
+    
+    while (getline(read, buffer))
+    {
+        write << "\n" << read.rdbuf();
+    }
+    
+    read.close();
+    write.close();
+    
+    if (remove("temp") == 0)
+    {
+        cout << "Appointment made.\n\n";
+
+        setPatient(student_id);
+        setStaff(ID);
+        setDate(date);
+        setTimeslot(time);
+        
+    }
 }
 
 //printSchedule Function
@@ -90,7 +178,8 @@ void schedule::printSchedule(int user_id)
     cout << "\nWhat schedule would you like to view?\n";
     cout << "Enter 1 for YOUR schedule TODAY.\n";
     cout << "Enter 2 for the MASTER schedule TODAY.\n";
-    cout << "Enter 3 for a specfic date.\nInput: ";
+
+    cout << "Enter 3 for a specific date.\nInput: ";
     cin >> choice;
     
     switch (choice) {
@@ -170,7 +259,7 @@ void schedule::addTimes(string date, int user_id, string name)
         }
         else
         {
-            edit << "\n- " << apt_times[i] << " : OFF.";
+            edit << "\n- " << apt_times[i] << " : OFF";
         }
     }
     
@@ -193,10 +282,11 @@ void schedule::printPersonalSchedule(int user_id)
 void schedule::printPersonalSchedule(int user_id, string date)
 {
     stringstream s_stream;
-    string target;
     bool found = false;
     bool done = false;
     s_stream << "* " << user_id << " ";
+    string target;
+
     target = s_stream.str();
     
     string file_char;
@@ -261,12 +351,11 @@ void schedule::printPersonalSchedule(int user_id, string date)
                 if (temp[0] == '-')
                 {
                     cout << file_char.substr(10);
-                    cout << "\t\t";
+                    cout << "\t\t\t";
                 }
                 else if (temp[0] == '+')
                 {
-                    cout << "x\t\t\t";
-                    
+                    cout << "\t\t\t";
                 }
                 else if (temp[0] == '#')
                 {
@@ -364,7 +453,9 @@ void schedule::printMasterSchedule(string date)
                 cout << "\t\t";
             }
             else if (temp[0] == '+')
-            { cout << "x\t\t\t"; }
+            {
+                cout << "x\t\t\t";
+            }
             else if (temp[0] == '#')
             { cout << endl; }
         
