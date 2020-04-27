@@ -45,28 +45,23 @@ public:
      */
     void editSchedule(schedule);
     
-    /**
-     Remove available times to semester schedule
-     
-     @param schedule An instance of the currant schedule
-     */
-    void removeAvailableTimes(schedule);
     
     /**
      Displays current statistics of Coronavirus cases in Ohio & USA.
      Displays Coronavirus related statistics of HS Facility.
      
-     @param nationalStats stats
+     @param CoronaInfo nationalStats
+     @param Statistics stats
      */
     void showStats(coronaInfo& nationalStats, Statistics& stats) const;
     
      /**
      Allows user to update patient record
      
-     @param User User must be passed to find record.
-     @param statistics
+     @param Statistics statSet
+     @param systemControl sys
      */
-    void updateRecord(schedule, User faculty, Statistics& statSet, const systemControl& sys);
+    void updateRecord(Statistics& statSet, const systemControl& sys);
     
     /**
      Displays patient record.
@@ -84,14 +79,14 @@ private:
      
      @param Schedule An instance of the current schedule
      */
-    void addDates(schedule);
+    void addDates(schedule& schedule);
     
     /**
      removes dates from semester schedule
      
      @param Schedule An instance of the current schedule
      */
-    void removeDates(schedule);
+    void removeDates(schedule& schedule);
    
 };
 
