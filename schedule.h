@@ -19,7 +19,7 @@ using namespace std;
 /**
 	@author Jakob Gojkov
 	@author Matthew Oster moster@kent.edu
-    @author Daniel Stephan dstephan@kent.edu
+  @author Daniel Stephan dstepha3@kent.edu
 */
 
 class ksuPatient;
@@ -34,8 +34,8 @@ struct appointment {
     bool isAvailable();
 	string date;
 	string timeslot;
-	ksuPatient* patient;
-	hsFaculty* faculty;
+	int patient = 0;
+	int faculty;
 };
 
 class schedule {
@@ -48,30 +48,33 @@ class schedule {
         /**
             Displays appointment information.
          */
-		void printAppt(appointment appt);
-		
+
+	  void printAppt();		
         /**
         Simple accessor methods.
         */
 		string getDate();
 		string getTimeslot();
-		ksuPatient getPatient();
-		hsFaculty getStaff();
+		int getPatient();
+		int getStaff();
 		
         /**
          Simple set methods.
          */
 		void setDate(string);
 		void setTimeslot(string timeslot);
-		void setPatient(ksuPatient patient);
-		void setStaff(hsFaculty faculty);
+		void setPatient(int patient_id);
+		void setStaff(int faculty_id);
 		
         /**
         Saves appointment to the schedule
          
-        @param appointment appt
+        @param string student_name
+        @param string date
+        @param string time
+        @param int ID
         */
-		void saveAppt(appointment appt);
+		void saveAppt(int student_id, string date, string time, int ID);
 		
         /**
         Displays the schedule
@@ -93,7 +96,9 @@ class schedule {
 	private:
         ofstream oSchedule;
         ifstream iSchedule;
-		appointment appt;
+
+    		appointment appointment;
+
     
         const string apt_times [12] = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                             "01:00", "01:30", "02:00", "02:30", "03:00", "03:30" };
