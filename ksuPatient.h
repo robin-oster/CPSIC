@@ -51,14 +51,13 @@ public:
      
      @param schedule An instance of the current schedule
      */
-    //void viewAppointment(schedule);
+    void viewAppointment(schedule schedule);
     
     /**
      Assigns user to appointment in schedule
-     
-     @param schedule An instance of the current schedule
+
      */
-    //void registerAppointment(schedule);
+    void registerAppointment(schedule& schedule);
     
     /**
      Allows user to reschedule appointment in schedule
