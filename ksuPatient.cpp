@@ -85,7 +85,7 @@ void ksuPatient::registerAppointment(schedule& schedule)
     
     int student_id = getID();
     string date, time;
-    int doctor;
+    int doctor = 0;
     
     int facultyChoice;
     

@@ -24,12 +24,14 @@ schedule::schedule() {
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
+}
 
 schedule::schedule(const schedule& src) {
     string current_date;
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
+}
 
 //printAppt function
 //Displays appointment

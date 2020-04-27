@@ -16,7 +16,7 @@ Statistics::Statistics() {
 }
 
 void Statistics::calculatePercentages() {
-	fluPercent = fluCount / patientCount;
-	coronaPercent = coronaCount / patientCount;
-	counselingPercent = counselingPercent / patientCount;
+	fluPercent = double(fluCount) / patientCount * 100;
+	coronaPercent = double(coronaCount) / patientCount * 100;
+	counselingPercent = double(counselingCount) / patientCount * 100;
 }

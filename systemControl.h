@@ -26,7 +26,7 @@
 
 class systemControl {
 public:
-	std::pair<User*, bool> logOn(); /*!< Facilitates the process of logging a user in.*/
+	bool logOn(User* thisUser); /*!< Facilitates the process of logging a user in.*/
 	bool logOff(); /*!< Logs the current user out of the system.*/
 	void networkUpdate(); /*!< Ensures that information is up to date across the system.*/
 	void calculateEarnings(); /*!< Calculates total earnings in the practitioner department, counseling department, and both combined.*/

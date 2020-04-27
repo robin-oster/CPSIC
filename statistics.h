@@ -24,15 +24,15 @@ public:
 	/**
 	Increments fluCount.
 	*/
-	void incrementFluCount() { fluCount++; }
+	void incrementFluCount() { fluCount++; if (patientCount > 0) calculatePercentages();}
 	/**
 	Increments coronaCount.
 	*/
-	void incrementCoronaCount() { coronaCount++;}
+	void incrementCoronaCount() { coronaCount++; if (patientCount > 0) calculatePercentages();}
 	/**
 	Increments counselingCount.
 	*/
-	void incrementCounselingCount() { counselingCount++; }
+	void incrementCounselingCount() { counselingCount++; if (patientCount > 0) calculatePercentages();}
 
 	/**
 	Calculates the percentages of patients who exhibit flu-like symptoms, the percentage who have contracted Coronavirus,

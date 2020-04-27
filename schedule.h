@@ -49,7 +49,7 @@ class schedule {
             Displays appointment information.
          */
 
-	  void printAppt();		
+	     void printAppt();		
         /**
         Simple accessor methods.
         */
@@ -97,7 +97,7 @@ class schedule {
         ofstream oSchedule;
         ifstream iSchedule;
 
-    		appointment appointment;
+    	appointment appointment;
 
     
         const string apt_times [12] = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",

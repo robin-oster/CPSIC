@@ -127,9 +127,9 @@ void hsFaculty::showStats(coronaInfo& nationalStats, Statistics& stats) const
 {
     User::showStats(nationalStats); // displays base class function first
     cout << "Patients Registered:\t\t" << stats.getPatientCount() << endl;
-    cout << "Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << endl;
-    cout << "# of Patients with Coronavirus:\t\t" << stats.getCoronaCount() << "  /  " << stats.getCoronaPercent() << endl;
-    cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << endl;
+    cout << "Flu like Symptoms:\t\t" << stats.getFluCount() << "  /  " << stats.getFluPercent() << "%" << endl;
+    cout << "# of Patients with Coronavirus:\t\t" << stats.getCoronaCount() << "  /  " << stats.getCoronaPercent()  << "%" << endl;
+    cout << "# of Patients who saught Counseling:\t" << stats.getCounselingCount() << "  /  " << stats.getCounselingPercent() << "%" << endl;
 }
 
 void hsFaculty::updateRecord(Statistics& statSet, const systemControl& sys)

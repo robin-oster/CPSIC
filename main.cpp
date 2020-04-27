@@ -17,7 +17,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <utility>
+#include <random>
 using namespace std;
 
 /**
@@ -36,30 +36,31 @@ int main()
 	Statistics stats;
 	coronaInfo c_info;
 	ksuSystemAccess ksuAccess(os);
-	User* mainUser; bool studentStatus;
+	User* mainUser = new User(); 
+	bool studentStatus;
 	bool log_out = false;
 	int prevCoronaCount = 0;
     
+	srand(time(NULL)); // for coronaInfo
+	sys.addStatisticSnapshot(stats); // initial info
 
 	do {
-		log_out = false;
-    sys.facultyAccess = false;
-		pair<User*, bool> userInfo = sys.logOn();
-		mainUser = userInfo.first;
-
-		stats.setPatientCount(sys.getPatientCount());
 		c_info.updateOhioCount();
 		c_info.updateUSCount();
 		if (c_info.getOhioCount() > prevCoronaCount) {
 			ksuAccess.generateAlert(c_info.getOhioCount() - prevCoronaCount);
 		}
 		prevCoronaCount = c_info.getOhioCount();
-    
-		sys.addStatisticSnapshot(stats);
 		sys.addCoronaSnapshot(c_info);
 
+		log_out = false;
+		sys.facultyAccess = false;
+		studentStatus = sys.logOn(mainUser);
+
+		stats.setPatientCount(sys.getPatientCount());
+
 		if (sys.facultyAccess == false) {
-			ksuPatient patientUser(*mainUser, userInfo.second);
+			ksuPatient patientUser(*mainUser, studentStatus);
 			unsigned int choice;
 
 			do {
@@ -117,17 +118,8 @@ int main()
 						patientUser.getCounselorBill()->payBill(paymentAmount);
 					}
 				}
-				else if (choice == 6) {
-					int logOutChoice;
-					do {
-						cout << "Log out? Enter 1 to confirm, 2 to cancel: ";
-						cin >> logOutChoice;
-						if (logOutChoice != 1 && logOutChoice != 2) cout << "Invalid input.Try again.\n";
-					} while (logOutChoice != 1 && logOutChoice != 2);
-
-					if (logOutChoice == 1) log_out = true;
-					else logOutChoice = false;
-				}
+				else if (choice == 6) 
+					log_out = sys.logOff();
 			} while (log_out == false);
 		}
 		else {
@@ -135,12 +127,12 @@ int main()
 			unsigned int choice;
 
 			do {
-				
+
 				do {
-                    
+
 					cout << "\nWelcome to the KSU-HS CPSIC. What would you like to do?\n";
 					cout << "Enter 1 to view your schedule.\n";
-					cout << "Press 2 to edit your schedule.\n"; 
+					cout << "Press 2 to edit your schedule.\n";
 					cout << "Enter 3 to view statistical information.\n";
 					cout << "Enter 4 to update a patient record.\n";
 					cout << "Enter 5 to view a patient record.\n";
@@ -152,37 +144,36 @@ int main()
 				} while (choice > 6);
 
 				if (choice == 1) {
-                    facultyUser.viewSchedule(schedule);
+					facultyUser.viewSchedule(schedule);
 				}
 				else if (choice == 2) {
-                    facultyUser.editSchedule(schedule);
+					facultyUser.editSchedule(schedule);
 				}
 				else if (choice == 3) {
-                    cout << endl;
+					char statChoice = ' ';
+
+					cout << endl;
 					facultyUser.showStats(c_info, stats);
-                    sys.visualizeStats();
-                    cout << endl;
+					cout << "\nVisualize statistics? (Y/N): ";
+					cin >> statChoice;
+					while (toupper(statChoice) != 'Y' && toupper(statChoice) != 'N') {
+						cout << "Invalid input. Try again: ";
+						cin >> statChoice;
+					}
+					if (toupper(statChoice) == 'Y') sys.visualizeStats();
+					cout << endl;
 				}
 				else if (choice == 4) {
 					facultyUser.updateRecord(stats, sys);
+					sys.addStatisticSnapshot(stats);
 					//update stats accordingly
 				}
 				else if (choice == 5) {
 					facultyUser.viewRecord(sys);
 				}
-				else if (choice == 6) {
-					int logOutChoice;
-					do {
-						cout << "Log out? Enter 1 to confirm, 2 to cancel: ";
-						cin >> logOutChoice;
-						if (logOutChoice != 1 && logOutChoice != 2) cout << "Invalid input.Try again.\n";
-					} while (logOutChoice != 1 && logOutChoice != 2);
-
-					if (logOutChoice == 1) log_out = true;
-					else logOutChoice = false;
-				}
+				else if (choice == 6)
+					log_out = sys.logOff();
 			} while (log_out == false);
-
 		}
 	} while (true);
 }
