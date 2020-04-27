@@ -30,7 +30,8 @@ using namespace std;
 int main()
 {
 	ofstream os;
-    	schedule schedule;
+  
+  schedule schedule;
 	systemControl sys;
 	Statistics stats;
 	coronaInfo c_info;
@@ -42,7 +43,7 @@ int main()
 
 	do {
 		log_out = false;
-        sys.facultyAccess = false;
+    sys.facultyAccess = false;
 		pair<User*, bool> userInfo = sys.logOn();
 		mainUser = userInfo.first;
 
@@ -53,6 +54,9 @@ int main()
 			ksuAccess.generateAlert(c_info.getOhioCount() - prevCoronaCount);
 		}
 		prevCoronaCount = c_info.getOhioCount();
+    
+		sys.addStatisticSnapshot(stats);
+		sys.addCoronaSnapshot(c_info);
 
 		if (sys.facultyAccess == false) {
 			ksuPatient patientUser(*mainUser, userInfo.second);

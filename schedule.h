@@ -1,17 +1,16 @@
 #pragma once
 
-//schedule.h
-
-//Header File for schedule class
+/**
+    schedule.h
+    Declaration file for class schedule
+*/
 
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
 
 //Include necessary directories
-#include <iostream>
 #include <fstream>
 #include <string>
-#include <chrono>
 #include <ctime>
 
 //set namespace to std
@@ -20,59 +19,90 @@ using namespace std;
 /**
 	@author Jakob Gojkov
 	@author Matthew Oster moster@kent.edu
+    @author Daniel Stephan dstephan@kent.edu
 */
 
 class ksuPatient;
 class hsFaculty;
 
-//apppointment structure
-//appointments saved to schedule
+/**
+    apppointment structure
+    appointments saved to schedule
+ */
 struct appointment {
 	//appointment data types
+    bool isAvailable();
 	string date;
 	string timeslot;
 	ksuPatient* patient;
 	hsFaculty* faculty;
 };
 
-//schedule class
 class schedule {
 	
 	//Function Declarations
 	public:
-		
-		//constructor
 		schedule();
 		schedule(const schedule& src);
 		
-		//printAppt function
-		//Displays appointment
+        /**
+            Displays appointment information.
+         */
 		void printAppt(appointment appt);
 		
-		//get and set functions
+        /**
+        Simple accessor methods.
+        */
 		string getDate();
 		string getTimeslot();
 		ksuPatient getPatient();
 		hsFaculty getStaff();
 		
+        /**
+         Simple set methods.
+         */
 		void setDate(string);
 		void setTimeslot(string timeslot);
 		void setPatient(ksuPatient patient);
 		void setStaff(hsFaculty faculty);
 		
-		//saveAppt function
-		//saves appointment to schedule
+        /**
+        Saves appointment to the schedule
+         
+        @param appointment appt
+        */
 		void saveAppt(appointment appt);
 		
-		//printSchedule Function
-		//Displays current schedule of appointments
-		void printSchedule();
-		
+        /**
+        Displays the schedule
+         
+        @param int integer containing userID must be passed
+        */
+		void printSchedule(int user_id);
+    
+        /**
+         Adds Faculty available times to the schedule
+     
+         @param string string containing the date
+         @param int integer containing userID
+         @param string name of faculty member
+         */
+        void addTimes(string date, int user_id, string names);
+    
+
 	private:
-		//schedule file stream
-		ifstream iSchedule;
-		ofstream oSchedule;
+        ofstream oSchedule;
+        ifstream iSchedule;
 		appointment appt;
+    
+        const string apt_times [12] = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                            "01:00", "01:30", "02:00", "02:30", "03:00", "03:30" };
+    
+        void printPersonalSchedule(int user_id);
+        void printPersonalSchedule(int user_id,string date);
+    
+        void printMasterSchedule();
+        void printMasterSchedule(string date);
 };
 
 #endif
