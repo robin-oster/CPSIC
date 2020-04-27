@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 #include <cstring>
+
 #include <cstdio>
 #include <vector>
 #include <iomanip>
@@ -23,14 +24,12 @@ schedule::schedule() {
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
-}
 
 schedule::schedule(const schedule& src) {
     string current_date;
     stringstream s_stream;
     s_stream << __DATE__;
     current_date = s_stream.str();
-}
 
 //printAppt function
 //Displays appointment
@@ -179,6 +178,7 @@ void schedule::printSchedule(int user_id)
     cout << "\nWhat schedule would you like to view?\n";
     cout << "Enter 1 for YOUR schedule TODAY.\n";
     cout << "Enter 2 for the MASTER schedule TODAY.\n";
+
     cout << "Enter 3 for a specific date.\nInput: ";
     cin >> choice;
     
@@ -286,6 +286,7 @@ void schedule::printPersonalSchedule(int user_id, string date)
     bool done = false;
     s_stream << "* " << user_id << " ";
     string target;
+
     target = s_stream.str();
     
     string file_char;
