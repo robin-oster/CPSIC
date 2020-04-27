@@ -19,7 +19,7 @@ using namespace std;
 /**
 	@author Jakob Gojkov
 	@author Matthew Oster moster@kent.edu
-    @author Daniel Stephan dstepha3@kent.edu
+  @author Daniel Stephan dstepha3@kent.edu
 */
 
 class ksuPatient;
@@ -48,8 +48,8 @@ class schedule {
         /**
             Displays appointment information.
          */
-		void printAppt();
-		
+
+	  void printAppt();		
         /**
         Simple accessor methods.
         */
@@ -96,7 +96,9 @@ class schedule {
 	private:
         ofstream oSchedule;
         ifstream iSchedule;
-		appointment appointment;
+
+    		appointment appointment;
+
     
         const string apt_times [12] = { "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                             "01:00", "01:30", "02:00", "02:30", "03:00", "03:30" };
