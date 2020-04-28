@@ -314,10 +314,10 @@ void schedule::printPersonalSchedule(int user_id, string date)
         cout << endl << setw(88) << date << "  SCHEDULE" << endl;
         cout << setw(129) << "-------------------------------------------------------------------------------------";
         
-        cout << "\n\n\t\t\t\t\t";
+        cout << "\n\n\t\t\t\t";
         for (int i = 0; i < 12; i ++)
         {
-            cout << apt_times[i] << "\t\t";
+            cout << setw(12) << apt_times[i];
         }
         
         char temp[25];
@@ -330,15 +330,15 @@ void schedule::printPersonalSchedule(int user_id, string date)
             {
             
                 if (file_char == "* 1 ")
-                    cout << "Doc/Nurse 1:\t\t";
+                    cout << "Doc/Nurse 1:";
                 else if (file_char == "* 2 ")
-                    cout << "Doc/Nurse 2:\t\t";
+                    cout << "Doc/Nurse 2:";
                 else if (file_char == "* 3 ")
-                    cout << "Doc/Nurse 3:\t\t";
+                    cout << "Doc/Nurse 3:";
                 else if (file_char == "* 4 ")
-                    cout << "Counselor 1:\t\t";
+                    cout << "Counselor 1:";
                 else if (file_char == "* 5 ")
-                    cout << "Counselor 2:\t\t";
+                    cout << "Counselor 2:";
             
                 found = true;
             }
@@ -352,12 +352,13 @@ void schedule::printPersonalSchedule(int user_id, string date)
             
                 if (temp[0] == '-')
                 {
-                    cout << file_char.substr(10);
-                    cout << "\t\t\t";
+                    cout << setw(13) << file_char.substr(10);
+                    //cout << "\t\t\t";
                 }
                 else if (temp[0] == '+')
                 {
-                    cout << "\t\t\t";
+                    cout << setw(12) << " ";
+                    //cout << "\t\t\t";
                 }
                 else if (temp[0] == '#')
                 {
@@ -423,10 +424,10 @@ void schedule::printMasterSchedule(string date)
         cout << endl << setw(88) << date << "  SCHEDULE" << endl;
         cout << setw(129) << "-------------------------------------------------------------------------------------";
         
-        cout << "\n\n\t\t\t\t\t";
+        cout << "\n\n\t\t\t\t";
         for (int i = 0; i < 12; i ++)
         {
-            cout << apt_times[i] << "\t\t";
+            cout << setw(12) << apt_times[i];
         }
         
         char temp[25];
@@ -436,27 +437,28 @@ void schedule::printMasterSchedule(string date)
         while (getline(read, file_char))
         {
             if (file_char == "* 1 ")
-                cout << "Doc/Nurse 1:\t\t";
+                cout << "Doc/Nurse 1:";
             else if (file_char == "* 2 ")
-                cout << "Doc/Nurse 2:\t\t";
+                cout << "Doc/Nurse 2:";
             else if (file_char == "* 3 ")
-                cout << "Doc/Nurse 3:\t\t";
+                cout << "Doc/Nurse 3:";
             else if (file_char == "* 4 ")
-                cout << "Counselor 1:\t\t";
+                cout << "Counselor 1:";
             else if (file_char == "* 5 ")
-                cout << "Counselor 2:\t\t";
+                cout << "Counselor 2:";
             else if (file_char == "\n")
                 cout << endl << endl;
             
             strcpy(temp, file_char.c_str());
             
             if (temp[0] == '-')
-            { cout << file_char.substr(10);
-                cout << "\t\t";
+            {
+                cout << setw(13) << file_char.substr(10);
+                //cout << "\t\t";
             }
             else if (temp[0] == '+')
             {
-                cout << "x\t\t\t";
+                    cout << setw(12) << "x";
             }
             else if (temp[0] == '#')
             { cout << endl; }
